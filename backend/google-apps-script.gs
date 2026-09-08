@@ -98,11 +98,24 @@ function doPost(e) {
   }
 }
 
-/** Abrir la URL /exec en el navegador cae aquí: sirve para comprobar que vive. */
-function doGet() {
+/**
+ * Abrir la URL /exec en el navegador cae aquí: sirve para comprobar que vive.
+ *
+ * Añadiéndole ?panel=TU_CLAVE devuelve además los enlaces a la hoja y a la
+ * carpeta. La clave la imprime instalar(); sin ella no se revela nada, porque
+ * esta URL es pública y ahí dentro hay datos personales de quien postula.
+ */
+function doGet(e) {
   var estado = { ok: true, servicio: "limly-labs-postulaciones" };
   try {
-    estado.postulaciones = Math.max(0, hoja().getLastRow() - 1);
+    var sheet = hoja();
+    estado.postulaciones = Math.max(0, sheet.getLastRow() - 1);
+
+    var clave = PropertiesService.getScriptProperties().getProperty("CLAVE_PANEL");
+    if (clave && e && e.parameter && e.parameter.panel === clave) {
+      estado.hoja = sheet.getParent().getUrl();
+      estado.carpeta = carpeta().getUrl();
+    }
   } catch (err) {
     estado.ok = false;
     estado.error = String(err);
@@ -133,13 +146,34 @@ function instalar() {
   }
   props.setProperty("FOLDER_ID", folder.getId());
 
+  if (!props.getProperty("CLAVE_PANEL")) {
+    props.setProperty("CLAVE_PANEL", Utilities.getUuid().replace(/-/g, "").slice(0, 16));
+  }
+
+  var resumen = enlaces() +
+    "\nSiguiente paso: Implementar → Nueva implementación → Aplicación web\n" +
+    "(Ejecutar como: Yo · Quién tiene acceso: Cualquier usuario)\n";
+  console.log(resumen);
+  return resumen;
+}
+
+/**
+ * ¿Perdiste las direcciones? Ejecuta esta función desde el editor y las vuelve
+ * a imprimir. No crea nada: solo lee lo que instalar() dejó guardado.
+ */
+function enlaces() {
+  var props = PropertiesService.getScriptProperties();
+  var sheet = hoja();
+  var url = "";
+  try { url = ScriptApp.getService().getUrl() || ""; } catch (err) { url = ""; }
+
   var resumen =
     "\n╭─ Limly Labs · postulaciones ─────────────────────────\n" +
     "│ Hoja:    " + sheet.getParent().getUrl() + "\n" +
-    "│ Carpeta: " + folder.getUrl() + "\n" +
-    "╰─ Guarda estos dos enlaces: son tu panel de la convocatoria.\n" +
-    "\nSiguiente paso: Implementar → Nueva implementación → Aplicación web\n" +
-    "(Ejecutar como: Yo · Quién tiene acceso: Cualquier usuario)\n";
+    "│ Carpeta: " + carpeta().getUrl() + "\n" +
+    "│ Filas:   " + Math.max(0, sheet.getLastRow() - 1) + "\n" +
+    (url ? "│ Panel:   " + url + "?panel=" + props.getProperty("CLAVE_PANEL") + "\n" : "") +
+    "╰─ Guarda la hoja y la carpeta: son tu panel de la convocatoria.\n";
   console.log(resumen);
   return resumen;
 }

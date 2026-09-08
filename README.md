@@ -83,9 +83,29 @@ aviso por cada postulación.
 
 ### Dónde ves los datos
 
-- **Los datos:** en tu Google Sheet, una fila por postulante con todos los campos.
-- **Los archivos:** en tu carpeta de Google Drive. En la hoja, las dos últimas
-  columnas traen el enlace directo al CV y al portafolio de cada persona.
+No hay panel propio: **el panel es tu Google Sheet.**
+
+- **Los datos:** una fila por postulante con todos los campos, en la hoja que
+  creaste en el paso 1. Está en <https://sheets.google.com> con el nombre
+  "Postulaciones Limly Labs 2026".
+- **Los archivos:** en tu carpeta de Drive, <https://drive.google.com>, carpeta
+  "Postulaciones Limly Labs 2026". En la hoja, las dos últimas columnas traen
+  el enlace directo al CV y al portafolio de cada persona.
+
+¿Perdiste las direcciones exactas? En el editor de Apps Script elige la función
+**`enlaces`** y pulsa Ejecutar: las vuelve a imprimir en el panel de ejecución,
+junto con el número de postulaciones recibidas.
+
+Eso te da también una URL de consulta rápida, con la clave que imprime
+`enlaces`:
+
+```
+https://script.google.com/macros/s/.../exec?panel=TU_CLAVE
+```
+
+Devuelve el total de postulaciones y los dos enlaces. **Sin la clave no revela
+nada**, y con razón: esa URL es pública y en la hoja hay datos personales de
+quien postula. No la pegues en el sitio ni la compartas fuera del equipo.
 
 ### Si algo falla
 

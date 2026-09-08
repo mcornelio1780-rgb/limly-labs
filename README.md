@@ -46,15 +46,40 @@ Mientras no configures un endpoint, las postulaciones se guardan solo en el
 navegador de quien postula. **Esto hay que hacerlo antes de publicar la
 convocatoria.**
 
-Sigue las instrucciones que están dentro de `backend/google-apps-script.gs`.
-Al terminar tendrás una URL que termina en `/exec`. Pégala en `postular.html`,
-en esta línea (cerca del inicio del bloque `<script>`):
+El receptor es un Google Apps Script: guarda cada postulación como una fila en
+una Google Sheet y sube el CV y el portafolio a una carpeta de Drive. Es gratis
+y no necesita servidor.
 
-```js
-var CONFIG = { endpoint: "https://script.google.com/macros/s/.../exec", maxCvMB: 5, maxPfMB: 10 };
-```
+1. Crea una hoja nueva en <https://sheets.new> y nómbrala
+   "Postulaciones Limly Labs 2026".
+2. En esa hoja: **Extensiones → Apps Script**. Borra lo que haya y pega todo
+   `backend/google-apps-script.gs`. Guarda.
+3. En el selector de función elige **`instalar`** y pulsa **Ejecutar**. Autoriza
+   los permisos (la pantalla de "app no verificada" es normal: la app es tuya —
+   Configuración avanzada → Ir a… → Permitir). Al terminar, el panel de
+   ejecución imprime los enlaces a tu hoja y a tu carpeta de Drive: **guárdalos,
+   son tu panel de la convocatoria.**
+4. **Implementar → Nueva implementación → Aplicación web**, con
+   *Ejecutar como:* **Yo** y *Quién tiene acceso:* **Cualquier usuario**.
+   Copia la URL que termina en `/exec`.
+5. Pega esa URL en el navegador. Si responde
+   `{"ok":true,"servicio":"limly-labs-postulaciones",...}`, está viva.
+6. Abre `postular.html` y pega la URL en esta línea (cerca del inicio del bloque
+   `<script>`):
 
-Haz commit y push: Vercel redespliega solo.
+   ```js
+   var CONFIG = { endpoint: "https://script.google.com/macros/s/.../exec", maxCvMB: 5, maxPfMB: 10 };
+   ```
+
+7. Commit y push: Vercel redespliega solo. Envía una postulación de prueba
+   desde el sitio y comprueba que aparece la fila.
+
+Si cambias el código del script después, usa **Implementar → Administrar
+implementaciones → editar (lápiz) → Versión: Nueva versión**. Si en cambio
+creas una implementación *nueva*, la URL cambia y el formulario deja de enviar.
+
+Opcional: pon tu correo en `NOTIFICAR_A` (dentro del `.gs`) para recibir un
+aviso por cada postulación.
 
 ### Dónde ves los datos
 
@@ -62,7 +87,15 @@ Haz commit y push: Vercel redespliega solo.
 - **Los archivos:** en tu carpeta de Google Drive. En la hoja, las dos últimas
   columnas traen el enlace directo al CV y al portafolio de cada persona.
 
-Guarda esos dos enlaces (hoja y carpeta): son tu panel de la convocatoria.
+### Si algo falla
+
+- **El formulario muestra error al enviar** → casi siempre la implementación
+  quedó como "Solo yo". Cámbiala a *Cualquier usuario* y vuelve a implementar.
+- **No aparece la fila** → en el editor de Apps Script, panel **Ejecuciones**:
+  ahí sale el error exacto de cada intento.
+- **Los enlaces de CV no abren para tu equipo** → tu cuenta de Workspace
+  prohíbe compartir con "cualquiera con el enlace". Los archivos están
+  guardados igual; compártelos desde la carpeta.
 
 ### Alternativa
 

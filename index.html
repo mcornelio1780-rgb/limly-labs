@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limly Labs — Venture studio · Built before dawn</title>
+<meta name="description" content="Limly Labs is a global venture studio (Delaware LLC) building and scaling nine digital business units with AI as core infrastructure. Internship program 2026: 22 openings in marketing, communications and operations.">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --night:#0B1130; --surface:#161B3D; --paper:#F4F1EA;
+  --coral:#FF6B4A; --peach:#FFB088; --muted:#6B6F8C;
+  --line:rgba(244,241,234,.10);
+  --grad:linear-gradient(100deg,#FF6B4A 0%,#FFB088 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{background:var(--night);color:var(--paper);font-family:Inter,system-ui,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.1}
+h1{font-weight:800;font-size:clamp(36px,6vw,66px);letter-spacing:-.035em}
+h2{font-weight:800;font-size:clamp(27px,3.5vw,40px);letter-spacing:-.03em}
+h3{font-weight:700;font-size:20px}
+.mono{font-family:'Space Mono',monospace}
+.muted{color:var(--muted)}
+
+header{position:sticky;top:0;z-index:60;backdrop-filter:blur(14px);background:rgba(11,17,48,.85);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:74px;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:17px;text-decoration:none}
+.iso{width:26px;height:26px;border-radius:50%;flex:0 0 26px;background:conic-gradient(from 190deg at 50% 50%,var(--coral) 0deg 90deg,var(--paper) 90deg 360deg)}
+.navlinks{display:flex;gap:26px;font-size:14.5px;font-weight:500}
+.navlinks a{text-decoration:none;color:rgba(244,241,234,.72)}
+.navlinks a:hover{color:var(--paper)}
+.navright{display:flex;align-items:center;gap:14px}
+.langs{display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:3px}
+.langs button{background:none;border:0;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;padding:4px 9px;border-radius:999px;cursor:pointer}
+.langs button.on{background:var(--coral);color:#0B1130;font-weight:700}
+.btn{display:inline-block;padding:11px 20px;border-radius:999px;font-weight:600;font-size:14.5px;text-decoration:none;background:var(--grad);color:#0B1130;border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--paper);border:1px solid rgba(244,241,234,.28)}
+.menu-toggle{display:none;background:none;border:0;color:var(--paper);font-size:23px;cursor:pointer}
+
+.hero{padding:92px 0 78px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-160px;top:-130px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 62% 72%,rgba(255,107,74,.30),transparent 62%);pointer-events:none}
+.eyebrow{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--coral);margin-bottom:20px}
+.lead{max-width:660px;font-size:19px;color:rgba(244,241,234,.74);margin-top:22px}
+.cta{display:flex;gap:14px;margin-top:34px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:60px}
+.stat{background:var(--night);padding:22px 20px}
+.stat b{display:block;font-family:'Space Mono',monospace;font-size:26px;font-weight:700}
+.stat span{font-size:13px;color:var(--muted)}
+
+section{padding:76px 0;border-top:1px solid var(--line)}
+.sec-head{max-width:700px;margin-bottom:42px}
+.sec-head p{color:rgba(244,241,234,.68);margin-top:14px;font-size:16.5px}
+
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.cap{border-top:3px solid var(--coral);background:var(--surface);border-radius:0 0 14px 14px;padding:24px 22px}
+.cap h3{font-size:17px;margin-bottom:10px}
+.cap p{font-size:14.5px;color:rgba(244,241,234,.66)}
+
+/* nosotros */
+.founders{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:36px}
+.founder{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px}
+.founder .av{width:56px;height:56px;border-radius:50%;background:conic-gradient(from 190deg at 50% 50%,var(--coral) 0deg 90deg,rgba(244,241,234,.18) 90deg 360deg);margin-bottom:16px}
+.founder h3{font-size:19px}
+.founder .role{font-family:'Space Mono',monospace;font-size:12px;color:var(--coral);margin:5px 0 12px}
+.founder p{font-size:14.5px;color:rgba(244,241,234,.68)}
+.recog{margin-top:56px}
+.recog h3{font-size:21px;margin-bottom:8px}
+.recog>p{color:rgba(244,241,234,.68);font-size:15.5px;max-width:660px;margin-bottom:22px}
+.rec-row{display:grid;grid-template-columns:250px 1fr;gap:24px;padding:18px 0;border-top:1px solid var(--line)}
+.rec-row b{font-size:16px;font-weight:700}
+.rec-row span{font-size:14.5px;color:rgba(244,241,234,.66)}
+@media(max-width:700px){.rec-row{grid-template-columns:1fr;gap:6px}}
+
+.units{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.unit{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 22px;display:flex;flex-direction:column;gap:10px;text-decoration:none}
+.unit.focus{border-color:rgba(255,107,74,.45);background:linear-gradient(180deg,rgba(255,107,74,.09),var(--surface) 55%)}
+.unit .top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.unit .name{font-weight:800;font-size:19px;letter-spacing:-.02em}
+.tag{font-family:'Space Mono',monospace;font-size:10.5px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.hot{border-color:rgba(255,107,74,.5);color:var(--coral)}
+.unit .what{font-size:14.5px;color:rgba(244,241,234,.70);flex:1}
+.unit .url{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--muted);word-break:break-all}
+
+/* mapa */
+.mapbox{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:26px;margin-top:8px}
+#worldmap{width:100%;height:auto;display:block}
+.dot-land{fill:rgba(244,241,234,.16)}
+.pin{fill:var(--coral)}
+.pin-halo{fill:rgba(255,107,74,.22)}
+.countrylist{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}
+.cchip{font-family:'Space Mono',monospace;font-size:11px;padding:5px 10px;border-radius:999px;background:rgba(244,241,234,.06);color:rgba(244,241,234,.66)}
+
+.principles{display:grid;grid-template-columns:repeat(2,1fr);gap:0 44px}
+.pr{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid var(--line)}
+.pr .n{font-family:'Space Mono',monospace;color:var(--coral);font-size:13px;padding-top:3px}
+.pr h3{font-size:16.5px;margin-bottom:5px}
+.pr p{font-size:14.5px;color:rgba(244,241,234,.66)}
+
+.callout{background:var(--grad);color:#0B1130;border-radius:18px;padding:34px 32px;display:flex;justify-content:space-between;align-items:center;gap:28px;flex-wrap:wrap}
+.callout h2{color:#0B1130;font-size:clamp(24px,3vw,34px)}
+.callout p{max-width:580px;font-size:15.5px;color:rgba(11,17,48,.82);margin-top:10px}
+.callout .btn{background:#0B1130;color:var(--paper)}
+
+.squad{margin-top:44px}
+.squad-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.squad-head h3{font-size:22px}
+.squad-head .count{font-family:'Space Mono',monospace;font-size:12.5px;color:var(--coral)}
+.squad-head .for{font-size:14px;color:var(--muted);margin-left:auto}
+.roles{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.role{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px}
+.role .rt{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;margin-bottom:10px}
+.role h4{font-size:16.5px;font-weight:700}
+.vac{font-family:'Space Mono',monospace;font-size:11px;background:rgba(255,107,74,.14);color:var(--coral);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.role p{font-size:14px;color:rgba(244,241,234,.68)}
+.role ul{margin:12px 0 0;padding-left:17px;font-size:13.5px;color:rgba(244,241,234,.62)}
+.role li{margin-bottom:4px}
+.stack{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:'Space Mono',monospace;font-size:10.5px;padding:4px 8px;border-radius:6px;background:rgba(244,241,234,.06);color:rgba(244,241,234,.62)}
+.cycle{margin-top:12px;font-size:12.5px;color:var(--muted)}
+.oncam{display:inline-block;font-family:'Space Mono',monospace;font-size:10.5px;color:var(--coral);border:1px solid rgba(255,107,74,.4);border-radius:999px;padding:3px 9px;margin-bottom:10px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px}
+th,td{text-align:left;padding:13px 18px;border-bottom:1px solid var(--line)}
+th{font-size:12px;font-weight:600;color:var(--muted);background:var(--surface)}
+tbody tr:last-child td{border-bottom:0}
+td.num{font-family:'Space Mono',monospace;color:var(--coral)}
+tr.total td{background:var(--surface);font-weight:700}
+
+.stackgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.sbox{border-top:3px solid var(--coral);background:var(--surface);padding:22px;border-radius:0 0 14px 14px}
+.sbox h3{font-size:16px;margin-bottom:10px}
+.sbox p{font-size:13.5px;color:var(--muted);margin-bottom:12px}
+
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:var(--line)}
+.tl{position:relative;padding-bottom:26px}
+.tl::before{content:"";position:absolute;left:-26px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--night);border:2px solid var(--coral)}
+.tl .step{font-family:'Space Mono',monospace;font-size:12px;color:var(--coral)}
+.tl h3{font-size:17px;margin:4px 0 5px}
+.tl p{font-size:14.5px;color:rgba(244,241,234,.66);max-width:640px}
+
+.cert{background:var(--surface);border:1px solid rgba(255,107,74,.35);border-radius:16px;padding:30px;margin-bottom:26px}
+.cert h3{font-size:21px;margin-bottom:12px}
+.cert p{color:rgba(244,241,234,.72);font-size:15px;max-width:740px}
+.cert ul{margin:16px 0 0 18px;font-size:14.5px;color:rgba(244,241,234,.68)}
+.cert li{margin-bottom:6px}
+.bens{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.ben{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.ben h4{font-size:15.5px;font-weight:700;margin-bottom:7px}
+.ben p{font-size:13.5px;color:rgba(244,241,234,.64)}
+.honest{margin-top:24px;border-left:3px solid var(--coral);padding:14px 0 14px 18px;font-size:14.5px;color:rgba(244,241,234,.72);max-width:780px}
+
+.req{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.req ul{list-style:none}
+.req li{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:11px}
+.req li b{color:var(--coral);font-family:'Space Mono',monospace;font-size:13px}
+
+footer{border-top:1px solid var(--line);padding:52px 0 40px}
+.fgrid{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+.fgrid p{font-size:13.5px;color:var(--muted);max-width:340px;margin-top:12px}
+.fgrid .col h4{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:12px}
+.fgrid .col a{display:block;font-size:14px;text-decoration:none;color:rgba(244,241,234,.75);margin-bottom:8px}
+.legal{margin-top:38px;padding-top:22px;border-top:1px solid var(--line);font-family:'Space Mono',monospace;font-size:11.5px;color:var(--muted)}
+
+@media(max-width:980px){
+  .grid4,.units,.stackgrid,.bens{grid-template-columns:repeat(2,1fr)}
+  .roles,.principles,.req,.founders{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .navlinks{display:none}
+  .navlinks.open{display:flex;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:var(--night);border-bottom:1px solid var(--line);padding:18px 24px;gap:16px}
+  .menu-toggle{display:block}
+  .navright .btn{display:none}
+  .grid4,.units,.stackgrid,.bens{grid-template-columns:1fr}
+  section{padding:56px 0}
+  .hero{padding:60px 0 54px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><span class="iso"></span>LIMLY LABS</a>
+    <nav class="navlinks" id="navlinks">
+      <a href="#nosotros" data-i18n="nav.about"></a>
+      <a href="#studio" data-i18n="nav.what"></a>
+      <a href="#portafolio" data-i18n="nav.portfolio"></a>
+      <a href="#modelo" data-i18n="nav.model"></a>
+      <a href="#pasantias" data-i18n="nav.internships"></a>
+      <a href="#beneficios" data-i18n="nav.benefits"></a>
+    </nav>
+    <div class="navright">
+      <div class="langs">
+        <button data-lang="es">ES</button><button data-lang="en">EN</button><button data-lang="pt">PT</button>
+      </div>
+      <a class="btn" href="postular.html" data-i18n="nav.apply"></a>
+      <button class="menu-toggle" aria-label="menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+    <h1 data-i18n="hero.h1"></h1>
+    <p class="lead" data-i18n="hero.lead"></p>
+    <div class="cta">
+      <a class="btn" href="#portafolio" data-i18n="hero.cta1"></a>
+      <a class="btn ghost" href="#pasantias" data-i18n="hero.cta2"></a>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>9</b><span data-i18n="stat.units"></span></div>
+      <div class="stat"><b>$0</b><span data-i18n="stat.capital"></span></div>
+      <div class="stat"><b>28</b><span data-i18n="stat.countries"></span></div>
+      <div class="stat"><b>3</b><span data-i18n="stat.langs"></span></div>
+    </div>
+  </div>
+</div>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="about.h2"></h2>
+      <p data-i18n="about.p1"></p>
+    </div>
+    <p style="max-width:760px;color:rgba(244,241,234,.68)" data-i18n="about.p2"></p>
+    <div class="founders">
+      <div class="founder">
+        <div class="av"></div>
+        <h3 data-i18n="about.f1name"></h3>
+        <div class="role" data-i18n="about.f1role"></div>
+        <p data-i18n="about.f1bio"></p>
+      </div>
+      <div class="founder">
+        <div class="av"></div>
+        <h3 data-i18n="about.f2name"></h3>
+        <div class="role" data-i18n="about.f2role"></div>
+        <p data-i18n="about.f2bio"></p>
+      </div>
+    </div>
+
+    <div class="recog">
+      <h3 data-i18n="about.rech"></h3>
+      <p data-i18n="about.recp"></p>
+      <div class="rec-row"><b data-i18n="about.r1t"></b><span data-i18n="about.r1d"></span></div>
+      <div class="rec-row"><b data-i18n="about.r2t"></b><span data-i18n="about.r2d"></span></div>
+      <div class="rec-row"><b data-i18n="about.r3t"></b><span data-i18n="about.r3d"></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ HACEMOS -->
+<section id="studio">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="what.h2"></h2>
+      <p data-i18n="what.p"></p>
+    </div>
+    <div class="grid4">
+      <div class="cap"><h3 data-i18n="what.c1t"></h3><p data-i18n="what.c1d"></p></div>
+      <div class="cap"><h3 data-i18n="what.c2t"></h3><p data-i18n="what.c2d"></p></div>
+      <div class="cap"><h3 data-i18n="what.c3t"></h3><p data-i18n="what.c3d"></p></div>
+      <div class="cap"><h3 data-i18n="what.c4t"></h3><p data-i18n="what.c4d"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTAFOLIO -->
+<section id="portafolio">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="pf.h2"></h2>
+      <p data-i18n="pf.p"></p>
+    </div>
+    <div class="units">
+      <a class="unit focus" href="https://www.limly.io" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Limly</span><span class="tag hot" data-i18n="pf.focus"></span></div>
+        <p class="what" data-i18n="pf.limly"></p><span class="url">limly.io</span>
+      </a>
+      <a class="unit focus" href="https://www.chass.app" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Chass</span><span class="tag hot" data-i18n="pf.focus"></span></div>
+        <p class="what" data-i18n="pf.chass"></p><span class="url">chass.app</span>
+      </a>
+      <a class="unit focus" href="https://chat.fluxo.lat/" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Fluxo</span><span class="tag hot" data-i18n="pf.focus"></span></div>
+        <p class="what" data-i18n="pf.fluxo"></p><span class="url">chat.fluxo.lat · GPL-3.0</span>
+      </a>
+      <div class="unit">
+        <div class="top"><span class="name">Yarah</span><span class="tag" data-i18n="pf.building"></span></div>
+        <p class="what" data-i18n="pf.yarah"></p><span class="url" data-i18n="pf.soon"></span>
+      </div>
+      <a class="unit" href="https://praxon-five.vercel.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Praxon</span><span class="tag" data-i18n="pf.revenue"></span></div>
+        <p class="what" data-i18n="pf.praxon"></p><span class="url">praxon</span>
+      </a>
+      <a class="unit" href="https://marqa-mu.vercel.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Marqa</span><span class="tag" data-i18n="pf.validating"></span></div>
+        <p class="what" data-i18n="pf.marqa"></p><span class="url">marqa</span>
+      </a>
+      <a class="unit" href="https://portada-ten.vercel.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Portada</span><span class="tag" data-i18n="pf.validating"></span></div>
+        <p class="what" data-i18n="pf.portada"></p><span class="url">portada</span>
+      </a>
+      <a class="unit" href="https://tramo-seven.vercel.app/" target="_blank" rel="noopener">
+        <div class="top"><span class="name">Tramo</span><span class="tag" data-i18n="pf.validating"></span></div>
+        <p class="what" data-i18n="pf.tramo"></p><span class="url">tramo</span>
+      </a>
+      <div class="unit">
+        <div class="top"><span class="name">Nova Star</span><span class="tag" data-i18n="pf.revenue"></span></div>
+        <p class="what" data-i18n="pf.nova"></p><span class="url" data-i18n="pf.agency"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA -->
+<section id="alcance">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2 data-i18n="map.h2"></h2>
+      <p data-i18n="map.p"></p>
+    </div>
+    <div class="mapbox">
+      <svg id="worldmap" viewBox="0 0 1000 380" role="img" aria-label="World map"></svg>
+      <div class="countrylist" id="countrylist"></div>
+    </div>
+  </div>
+</section>
+
+<!-- MODELO -->
+<section id="modelo">
+  <div class="wrap">
+    <div class="sec-head"><h2 data-i18n="model.h2"></h2><p data-i18n="model.p"></p></div>
+    <div class="principles">
+      <div class="pr"><span class="n">01</span><div><h3 data-i18n="model.p1t"></h3><p data-i18n="model.p1d"></p></div></div>
+      <div class="pr"><span class="n">02</span><div><h3 data-i18n="model.p2t"></h3><p data-i18n="model.p2d"></p></div></div>
+      <div class="pr"><span class="n">03</span><div><h3 data-i18n="model.p3t"></h3><p data-i18n="model.p3d"></p></div></div>
+      <div class="pr"><span class="n">04</span><div><h3 data-i18n="model.p4t"></h3><p data-i18n="model.p4d"></p></div></div>
+      <div class="pr"><span class="n">05</span><div><h3 data-i18n="model.p5t"></h3><p data-i18n="model.p5d"></p></div></div>
+      <div class="pr"><span class="n">06</span><div><h3 data-i18n="model.p6t"></h3><p data-i18n="model.p6d"></p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PASANTÍAS -->
+<section id="pasantias">
+  <div class="wrap">
+    <div class="callout">
+      <div><h2 data-i18n="int.h2"></h2><p data-i18n="int.p"></p></div>
+      <a class="btn" href="postular.html" data-i18n="int.cta"></a>
+    </div>
+    <div class="sec-head" style="margin-top:54px">
+      <h2 data-i18n="int.orgh"></h2>
+      <p data-i18n="int.orgp"></p>
+    </div>
+    <div id="squads"></div>
+
+    <div style="margin-top:54px">
+      <div class="sec-head"><h2 data-i18n="int.tableh"></h2></div>
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th data-i18n="int.thsquad"></th><th data-i18n="int.thunit"></th>
+            <th data-i18n="int.tharea"></th><th data-i18n="int.thvac"></th>
+          </tr></thead>
+          <tbody id="summaryrows"></tbody>
+        </table>
+      </div>
+      <p class="muted" style="font-size:14px;margin-top:14px" data-i18n="int.tablenote"></p>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack">
+  <div class="wrap">
+    <div class="sec-head"><h2 data-i18n="st.h2"></h2><p data-i18n="st.p"></p></div>
+    <div class="stackgrid">
+      <div class="sbox"><h3 data-i18n="st.b1t"></h3><p data-i18n="st.b1d"></p><div class="stack"><span class="chip">Figma</span><span class="chip">Canva Pro</span><span class="chip">CapCut</span><span class="chip">Adobe CC</span><span class="chip">After Effects</span><span class="chip">Screen Studio</span><span class="chip">Descript</span></div></div>
+      <div class="sbox"><h3 data-i18n="st.b2t"></h3><p data-i18n="st.b2d"></p><div class="stack"><span class="chip">Claude</span><span class="chip">ChatGPT</span><span class="chip">Midjourney</span><span class="chip">ElevenLabs</span><span class="chip">HeyGen</span><span class="chip">Runway</span></div></div>
+      <div class="sbox"><h3 data-i18n="st.b3t"></h3><p data-i18n="st.b3d"></p><div class="stack"><span class="chip">Metricool</span><span class="chip">Buffer</span><span class="chip">Meta Business Suite</span><span class="chip">TikTok Creative Center</span><span class="chip">LinkedIn</span><span class="chip">X</span></div></div>
+      <div class="sbox"><h3 data-i18n="st.b4t"></h3><p data-i18n="st.b4d"></p><div class="stack"><span class="chip">n8n</span><span class="chip">Make</span><span class="chip">Zapier</span><span class="chip">Airtable</span><span class="chip">Apps Script</span><span class="chip">Webhooks</span></div></div>
+      <div class="sbox"><h3 data-i18n="st.b5t"></h3><p data-i18n="st.b5d"></p><div class="stack"><span class="chip">Google Analytics 4</span><span class="chip">Looker Studio</span><span class="chip">Search Console</span><span class="chip">Ahrefs</span><span class="chip">Semrush</span></div></div>
+      <div class="sbox"><h3 data-i18n="st.b6t"></h3><p data-i18n="st.b6d"></p><div class="stack"><span class="chip">Notion</span><span class="chip">Slack</span><span class="chip">Limly</span><span class="chip">Google Workspace</span><span class="chip">HubSpot free</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="wrap">
+    <div class="sec-head"><h2 data-i18n="pr.h2"></h2><p data-i18n="pr.p"></p></div>
+    <div class="timeline">
+      <div class="tl"><span class="step" data-i18n="pr.s1"></span><h3 data-i18n="pr.s1t"></h3><p data-i18n="pr.s1d"></p></div>
+      <div class="tl"><span class="step" data-i18n="pr.s2"></span><h3 data-i18n="pr.s2t"></h3><p data-i18n="pr.s2d"></p></div>
+      <div class="tl"><span class="step" data-i18n="pr.s3"></span><h3 data-i18n="pr.s3t"></h3><p data-i18n="pr.s3d"></p></div>
+      <div class="tl"><span class="step" data-i18n="pr.s4"></span><h3 data-i18n="pr.s4t"></h3><p data-i18n="pr.s4d"></p></div>
+      <div class="tl"><span class="step" data-i18n="pr.s5"></span><h3 data-i18n="pr.s5t"></h3><p data-i18n="pr.s5d"></p></div>
+      <div class="tl"><span class="step" data-i18n="pr.s6"></span><h3 data-i18n="pr.s6t"></h3><p data-i18n="pr.s6d"></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFICIOS -->
+<section id="beneficios">
+  <div class="wrap">
+    <div class="sec-head"><h2 data-i18n="bn.h2"></h2><p data-i18n="bn.p"></p></div>
+    <div class="cert">
+      <h3 data-i18n="bn.certh"></h3>
+      <p data-i18n="bn.certp"></p>
+      <ul>
+        <li data-i18n="bn.cert1"></li><li data-i18n="bn.cert2"></li><li data-i18n="bn.cert3"></li>
+        <li data-i18n="bn.cert4"></li><li data-i18n="bn.cert5"></li><li data-i18n="bn.cert6"></li>
+      </ul>
+    </div>
+    <div class="cert" style="border-color:var(--line)">
+      <h3 data-i18n="bn.culth"></h3>
+      <p data-i18n="bn.cultp"></p>
+      <ul>
+        <li data-i18n="bn.cult1"></li><li data-i18n="bn.cult2"></li><li data-i18n="bn.cult3"></li><li data-i18n="bn.cult4"></li>
+      </ul>
+    </div>
+    <div class="bens" id="benslist"></div>
+    <p class="honest" data-i18n="bn.honest"></p>
+  </div>
+</section>
+
+<!-- REQUISITOS -->
+<section id="postular">
+  <div class="wrap">
+    <div class="sec-head"><h2 data-i18n="rq.h2"></h2></div>
+    <div class="req">
+      <div>
+        <h3 style="margin-bottom:12px" data-i18n="rq.yes"></h3>
+        <ul>
+          <li><b>01</b><span data-i18n="rq.y1"></span></li>
+          <li><b>02</b><span data-i18n="rq.y2"></span></li>
+          <li><b>03</b><span data-i18n="rq.y3"></span></li>
+          <li><b>04</b><span data-i18n="rq.y4"></span></li>
+          <li><b>05</b><span data-i18n="rq.y5"></span></li>
+          <li><b>06</b><span data-i18n="rq.y6"></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="margin-bottom:12px" data-i18n="rq.no"></h3>
+        <ul>
+          <li><b>—</b><span data-i18n="rq.n1"></span></li>
+          <li><b>—</b><span data-i18n="rq.n2"></span></li>
+          <li><b>—</b><span data-i18n="rq.n3"></span></li>
+          <li><b>—</b><span data-i18n="rq.n4"></span></li>
+          <li><b>—</b><span data-i18n="rq.n5"></span></li>
+          <li><b>—</b><span data-i18n="rq.n6"></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:46px">
+      <div><h2 data-i18n="rq.ctah"></h2><p data-i18n="rq.ctap"></p></div>
+      <a class="btn" href="postular.html" data-i18n="rq.ctab"></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="brand" href="#top"><span class="iso"></span>LIMLY LABS</a>
+        <p data-i18n="ft.desc"></p>
+      </div>
+      <div class="col">
+        <h4 data-i18n="ft.focus"></h4>
+        <a href="https://www.limly.io" target="_blank" rel="noopener">Limly</a>
+        <a href="https://www.chass.app" target="_blank" rel="noopener">Chass</a>
+        <a href="https://chat.fluxo.lat/" target="_blank" rel="noopener">Fluxo</a>
+      </div>
+      <div class="col">
+        <h4 data-i18n="ft.pf"></h4>
+        <a href="https://praxon-five.vercel.app/" target="_blank" rel="noopener">Praxon</a>
+        <a href="https://marqa-mu.vercel.app/" target="_blank" rel="noopener">Marqa</a>
+        <a href="https://portada-ten.vercel.app/" target="_blank" rel="noopener">Portada</a>
+        <a href="https://tramo-seven.vercel.app/" target="_blank" rel="noopener">Tramo</a>
+      </div>
+      <div class="col">
+        <h4 data-i18n="ft.holding"></h4>
+        <a href="#nosotros" data-i18n="nav.about"></a>
+        <a href="#modelo" data-i18n="nav.model"></a>
+        <a href="#pasantias" data-i18n="nav.internships"></a>
+        <a href="postular.html" data-i18n="nav.apply"></a>
+      </div>
+    </div>
+    <p class="legal" data-i18n="ft.legal"></p>
+  </div>
+</footer>
+
+<script>
+/* =========================================================
+   LIMLY LABS — datos y traducciones (ES / EN / PT)
+   Editar aquí cambia el sitio y el formulario a la vez.
+   ========================================================= */
+
+var I18N = {
+es:{
+"nav.about":"Nosotros","nav.what":"Qué hacemos","nav.portfolio":"Portafolio","nav.model":"Cómo operamos",
+"nav.internships":"Pasantías","nav.benefits":"Beneficios","nav.apply":"Postular",
+
+"hero.eyebrow":"Venture studio · Delaware LLC · Equipo global y remoto",
+"hero.h1":"Construimos empresas con IA, antes del amanecer.",
+"hero.lead":"Limly Labs no invierte en startups: las construye. Nueve unidades de negocio operando bajo un mismo holding, con marca, infraestructura y equipo compartidos. Sin capital externo. Sin esperar permiso.",
+"hero.cta1":"Ver el portafolio","hero.cta2":"22 vacantes de pasantía",
+"stat.units":"Unidades de negocio activas","stat.capital":"Capital externo levantado",
+"stat.countries":"Países con usuarios registrados","stat.langs":"Idiomas de operación (ES/EN/PT)",
+
+"about.h2":"Quiénes somos",
+"about.p1":"Limly Labs es un venture studio global constituido como LLC en Delaware, Estados Unidos. No tenemos sede: tenemos husos horarios. El equipo trabaja distribuido y el holding opera en tres idiomas desde el primer día.",
+"about.p2":"Lo fundaron dos personas que estudiaron juntas en la Universidad Peruana de Ciencias Aplicadas y que se cansaron de esperar. Uno viene del lado del negocio y del go-to-market; el otro, del producto y la ingeniería. Esa mezcla es el motivo por el que una idea puede convertirse en un producto en producción en cuestión de días, y por el que cada unidad nace ya con marca, web, canal y precio definidos.",
+"about.f1name":"Michell Anyosa","about.f1role":"Cofundador · CEO",
+"about.f1bio":"Lidera go-to-market, fundraising, alianzas y comunidad. Antes de Limly trabajó en crecimiento y desarrollo de negocio dentro del ecosistema de Henry (YC S20), el bootcamp de programación en español más grande respaldado por Y Combinator. Tiene dos MBA, ha asesorado a más de 100 startups en América Latina y es jurado y mentor de Startup Chile, Ganas Ventures y el Hult Prize. En diciembre de 2020 recibió financiamiento de la Fundación Rockefeller para un emprendimiento anterior. Escribe una newsletter sobre IA y productividad con más de 31.000 suscriptores y llega a más de 14.000 seguidores en LinkedIn: el canal que le trajo a Limly sus primeros 5.700 usuarios sin un dólar de publicidad.",
+"about.f2name":"Pierre Baldera","about.f2role":"Cofundador · CTO",
+"about.rech":"Seleccionados en 2026",
+"about.recp":"Entre junio y agosto de 2026, Limly fue seleccionada en cuatro programas internacionales independientes.",
+"about.r1t":"Web Summit Rio",
+"about.r1d":"Top 20 del Startup Showcase impulsado por Google for Startups, entre más de 1.200 postulantes.",
+"about.r2t":"Unicorn Factory Lisboa",
+"about.r2d":"Empresa del portafolio: la única startup peruana del batch actual y la segunda en los diez años de historia de la aceleradora.",
+"about.r3t":"AI Hub Lisbon",
+"about.r3d":"Nuestra base europea, a través del portafolio de Unicorn Factory Lisboa.",
+"about.f2bio":"Responsable de producto, arquitectura, ingeniería y datos. Es ingeniero de sistemas y pasó tres años construyendo sistemas empresariales para la infraestructura de salud pública del Estado peruano, donde la fiabilidad, la seguridad y la privacidad de datos son requisitos legales y no preferencias. Por eso el procesamiento de audio en el dispositivo y el cifrado AES-256 de Limly se diseñaron desde el primer commit y no se añadieron después. Llevó Limly de la versión 1.0.0 a la 1.3.10, lanzó más de 50 integraciones, los espacios de trabajo en equipo, el panel de administración, los roles y permisos, el motor de memoria conectada y el chat entre historiales, y resolvió la parte difícil: la separación de audio en dos canales en tiempo real con respuesta de IA en menos de dos segundos, íntegramente en el dispositivo y sin ningún bot visible para el resto de la llamada.",
+
+"what.h2":"Qué hacemos",
+"what.p":"Un venture studio no es una incubadora ni un fondo. Nosotros ponemos la idea, el código, la marca y los primeros clientes. Cada unidad nace dentro del holding y sale al mercado con la infraestructura ya montada.",
+"what.c1t":"Detectamos el problema","what.c1d":"Investigación de mercado, mapeo de competencia y validación de dolor real antes de escribir una línea de código.",
+"what.c2t":"Construimos el producto","what.c2d":"De idea a producto en producción en días, no en trimestres. IA como infraestructura de ejecución, no como argumento de venta.",
+"what.c3t":"Conseguimos el primer dólar","what.c3d":"Marca, web, contenido y canal de adquisición desde el día uno. Ninguna unidad existe hasta que alguien paga por ella.",
+"what.c4t":"Escalamos o cerramos","what.c4d":"Lo que crece recibe más recursos del holding. Lo que no funciona se apaga rápido y sin drama. La disciplina es el activo.",
+
+"pf.h2":"Nueve unidades, un holding",
+"pf.p":"Tres unidades están en foco de crecimiento agresivo este trimestre: Limly, Chass y Fluxo. El resto opera, factura o está en validación.",
+"pf.focus":"Foco de crecimiento","pf.building":"En construcción","pf.validating":"En validación","pf.revenue":"Facturando",
+"pf.soon":"próximamente","pf.agency":"agencia del holding",
+"pf.limly":"Tu chief of staff con IA. Captura las reuniones sin meter un bot en la llamada y convierte cada conversación en memoria buscable, tareas asignadas y seguimientos redactados. Mac, Windows y más de 60 idiomas.",
+"pf.chass":"Infraestructura de pagos cross-border para LATAM. Cobrar y mover dinero entre países sin la fricción, los tiempos ni las comisiones de la banca tradicional.",
+"pf.fluxo":"Soporte con IA para SaaS en 10 líneas de código. Open source, nativo de React y Next.js: el agente aprende de las respuestas del equipo y contesta dentro del producto.",
+"pf.yarah":"Un C-Level completo de agentes de IA: dirección general, marketing, finanzas, operaciones, legal, ventas, growth y customer success. Piensan, investigan y ejecutan sin parar.",
+"pf.praxon":"Consultora de desarrollo tecnológico. Software a medida, dashboards, ERP y automatización de procesos. Estándar internacional a costo nearshore.",
+"pf.marqa":"Vigilancia y protección de marcas. Analiza el porcentaje de similitud de tu marca contra más de 120 millones de registros activos en 189 países.",
+"pf.portada":"Agencia de noticias y red de distribución para el ecosistema emprendedor. Notas en tres idiomas, con ediciones por país y rebote en medios aliados.",
+"pf.tramo":"Calculadora de presupuesto para nómadas digitales: dinos cuánto tienes y te decimos cuántos días te alcanza y en qué ciudades.",
+"pf.nova":"Marketing as a Service para startups y pymes. Estrategia, contenido, diseño, publicidad y automatización: el departamento de marketing completo, sin contratar a nadie.",
+
+"map.h2":"28 países, un solo equipo",
+"map.p":"Nuestros usuarios están repartidos por América, Europa, Asia y Oceanía. El equipo también: quien entra al programa trabaja con compañeros en varios husos horarios y en tres idiomas desde la primera semana.",
+
+"model.h2":"Cómo operamos","model.p":"Seis reglas que aplican igual a la unidad que factura y a la que todavía no existe.",
+"model.p1t":"Revenue primero","model.p1d":"No levantamos capital antes de validar ingresos reales. El primer cliente es la única ronda que importa al inicio.",
+"model.p2t":"Infraestructura compartida","model.p2d":"Marca, legal, diseño, automatizaciones y datos viven en el holding. Una unidad nueva arranca con todo eso resuelto.",
+"model.p3t":"Construir en público","model.p3d":"Publicamos números reales, no proyecciones. La transparencia es nuestro canal de adquisición más barato.",
+"model.p4t":"IA como equipo, no como herramienta","model.p4d":"Agentes con rol, objetivo y métrica. Cada persona del equipo opera como si dirigiera un área completa.",
+"model.p5t":"Global desde el día uno","model.p5d":"Todo se piensa en español, inglés y portugués. Ningún mercado es el techo.",
+"model.p6t":"Velocidad sobre perfección","model.p6d":"Preferimos publicar hoy y corregir mañana. Lo que no sale al mercado no aprende nada.",
+
+"int.h2":"Programa de Pasantías 2026",
+"int.p":"22 vacantes en marketing, comunicaciones y operaciones. 12 semanas renovables hasta 24, 100% remoto, para estudiantes universitarios de 2.º a 8.º ciclo. Certificado emitido por Limly Labs LLC (Delaware, EE.UU.).",
+"int.cta":"Quiero postular",
+"int.orgh":"Cómo está organizado el equipo",
+"int.orgp":"No buscamos practicantes de marketing genéricos. Cada persona entra a un squad asignado a una unidad de negocio concreta, con una métrica propia. Doce de las veintidós vacantes están concentradas en Limly, Chass y Fluxo, porque la prioridad del trimestre es la visibilidad de esas tres.",
+"int.vac1":"vacante","int.vacn":"vacantes","int.oncam":"Frente a cámara",
+"int.tableh":"Resumen de vacantes","int.thsquad":"Squad","int.thunit":"Unidad de negocio","int.tharea":"Área","int.thvac":"Vacantes","int.thtotal":"Total del programa",
+"int.tablenote":"12 de las 22 vacantes están asignadas a Limly, Chass y Fluxo: el 55% del equipo trabajando sobre las tres unidades en foco.",
+
+"st.h2":"El stack con el que vas a trabajar",
+"st.p":"No hace falta dominarlo todo. Sí hace falta no tenerle miedo a aprender una herramienta nueva en una tarde.",
+"st.b1t":"Diseño y video","st.b1d":"La base visual del programa. Todo pasa por aquí antes de publicarse.",
+"st.b2t":"Contenido e IA","st.b2d":"La IA redacta el primer borrador. La persona decide qué se publica.",
+"st.b3t":"Redes y publicación","st.b3d":"Programación, escucha social y gestión de comunidad.",
+"st.b4t":"Automatización","st.b4d":"Todo proceso repetido dos veces se convierte en un flujo automático.",
+"st.b5t":"Datos y SEO","st.b5d":"Sin medición no hay decisión. Cada squad reporta con números.",
+"st.b6t":"Operación diaria","st.b6d":"Dónde vive el trabajo del equipo: tareas, reuniones y documentación.",
+
+"pr.h2":"Ventana de oportunidades",
+"pr.p":"La convocatoria abre una vez por cohorte y no se reabre hasta la siguiente. Estos son los seis pasos, de la postulación al certificado.",
+"pr.s1":"Paso 1","pr.s1t":"Postulación","pr.s1d":"Formulario de cinco minutos con tus datos, tu CV y el enlace a tu portafolio o repositorio. Sin carta de presentación.",
+"pr.s2":"Paso 2","pr.s2t":"Selección","pr.s2d":"Revisamos cada postulación. Si avanzas, te escribimos por correo con un enlace para que agendes tu entrevista en el horario que te convenga.",
+"pr.s3":"Paso 3","pr.s3t":"Entrevista","pr.s3d":"Conversación de 25 minutos con el responsable de tu squad y un cofundador. Hablamos de tu experiencia, de lo que quieres aprender y de tu disponibilidad real durante el ciclo académico.",
+"pr.s4":"Paso 4","pr.s4t":"Incorporación","pr.s4d":"Si quedas seleccionado firmas los documentos del programa, recibes los accesos a las herramientas, se te asigna el squad y se define tu indicador del periodo.",
+"pr.s5":"Paso 5","pr.s5t":"Programa","pr.s5d":"12 semanas de trabajo remoto, entre 12 y 15 horas por semana con horario flexible. Una reunión de squad semanal y semana sin entregas durante parciales y finales.",
+"pr.s6":"Paso 6","pr.s6t":"Cierre y renovación","pr.s6d":"Evaluación final y entrega del certificado. La pasantía es renovable: puedes extenderla por un segundo periodo y acumular hasta 24 semanas certificadas en el mismo programa.",
+
+"bn.h2":"Qué recibes",
+"bn.p":"Esta es una pasantía no remunerada. Lo decimos primero y sin adornos, para que decidas con la información completa. A cambio, esto es lo que sí entregamos.",
+"bn.certh":"Certificado emitido por una empresa estadounidense",
+"bn.certp":"Al completar el programa recibes un certificado emitido por Limly Labs LLC, sociedad registrada en Delaware, Estados Unidos. No es una constancia genérica de participación: documenta lo que hiciste, con qué resultados, y es verificable ante tu universidad y ante cualquier empleador dentro o fuera de tu país.",
+"bn.cert1":"12 semanas certificadas, con aproximadamente 150 horas acreditadas por periodo",
+"bn.cert2":"Renovable por un segundo periodo: hasta 24 semanas acumuladas en el mismo certificado",
+"bn.cert3":"Detalle del cargo, la unidad de negocio, las funciones y los resultados obtenidos",
+"bn.cert4":"Emitido en español e inglés, con código de verificación en línea",
+"bn.cert5":"Firmado por un cofundador y por el responsable directo de tu squad",
+"bn.cert6":"Compatible con la acreditación de prácticas preprofesionales: completamos los formatos y convenios que pida tu facultad",
+"bn.culth":"Un equipo de varios países en la misma sala",
+"bn.cultp":"Hoy tenemos practicantes en Estados Unidos, Venezuela, Argentina y Perú. Eso no es un dato de color: cambia cómo trabajas y qué aprendes.",
+"bn.cult1":"Coordinas con compañeros en distintos husos horarios y aprendes a trabajar de forma asíncrona",
+"bn.cult2":"Convives con español, inglés y portugués en el trabajo diario, no en un curso",
+"bn.cult3":"Ves cómo se adapta un mismo mensaje a mercados con culturas y modismos distintos",
+"bn.cult4":"Construyes una red profesional que no se detiene en la frontera de tu ciudad",
+"bn.honest":"Para ser claros: no hay remuneración económica durante el programa. Si necesitas ingresos ahora, esta convocatoria no es para ti y preferimos decírtelo antes de que inviertas tiempo en postular. Si lo que buscas es experiencia real, un certificado internacional y una puerta de entrada a un equipo que sí paga cuando alguien demuestra que aporta, aquí la tienes.",
+
+"rq.h2":"Requisitos y postulación","rq.yes":"Qué pedimos","rq.no":"Qué no pedimos",
+"rq.y1":"Estudiante universitario de 2.º a 8.º ciclo, en cualquier carrera relacionada con el rol.",
+"rq.y2":"Disponibilidad real de 12 a 15 horas por semana durante 12 semanas.",
+"rq.y3":"Computadora propia y conexión estable a internet.",
+"rq.y4":"Para los roles de creador de contenido: disposición a grabar frente a cámara.",
+"rq.y5":"Al menos una muestra de trabajo previo, aunque sea de un curso o un proyecto personal.",
+"rq.y6":"Autonomía: aquí nadie te va a recordar tres veces una entrega.",
+"rq.n1":"Experiencia laboral previa.","rq.n2":"Carta de presentación ni CV con diseño elaborado.",
+"rq.n3":"Que estudies en una universidad específica.","rq.n4":"Que ya domines todas las herramientas del stack.",
+"rq.n5":"Que vivas en un país determinado. El programa es 100% remoto.","rq.n6":"Promedio ponderado ni ranking académico.",
+"rq.ctah":"Postula a la cohorte 2026",
+"rq.ctap":"Elige el squad y el perfil que más te interesa, o marca la opción de adaptarte a cualquier perfil. Nos comunicaremos contigo por correo electrónico.",
+"rq.ctab":"Ir al formulario",
+
+"ft.desc":"Venture studio global. Construimos y escalamos negocios digitales con IA como infraestructura central.",
+"ft.focus":"Unidades en foco","ft.pf":"Portafolio","ft.holding":"Holding",
+"ft.legal":"© 2026 LIMLY LABS LLC · Delaware, Estados Unidos · Equipo global y remoto · Construimos antes del amanecer."
+},
+
+en:{
+"nav.about":"About us","nav.what":"What we do","nav.portfolio":"Portfolio","nav.model":"How we operate",
+"nav.internships":"Internships","nav.benefits":"Benefits","nav.apply":"Apply",
+
+"hero.eyebrow":"Venture studio · Delaware LLC · Global remote team",
+"hero.h1":"We build AI companies, before dawn.",
+"hero.lead":"Limly Labs doesn't invest in startups: it builds them. Nine business units running under one holding, sharing brand, infrastructure and team. No outside capital. No waiting for permission.",
+"hero.cta1":"See the portfolio","hero.cta2":"22 internship openings",
+"stat.units":"Active business units","stat.capital":"Outside capital raised",
+"stat.countries":"Countries with registered users","stat.langs":"Operating languages (ES/EN/PT)",
+
+"about.h2":"Who we are",
+"about.p1":"Limly Labs is a global venture studio incorporated as an LLC in Delaware, United States. We don't have a headquarters: we have time zones. The team works distributed and the holding operates in three languages from day one.",
+"about.p2":"It was founded by two people who studied together at Universidad Peruana de Ciencias Aplicadas and got tired of waiting. One comes from the business and go-to-market side; the other from product and engineering. That mix is why an idea can become a shipped product in days, and why every unit is born with brand, website, channel and pricing already defined.",
+"about.f1name":"Michell Anyosa","about.f1role":"Co-founder · CEO",
+"about.f1bio":"Leads go-to-market, fundraising, partnerships and community. Before Limly he worked on growth and business development in the Henry (YC S20) ecosystem, the largest Spanish-language coding bootcamp backed by Y Combinator. He holds two MBAs, has advised more than 100 startups across Latin America, and serves as a judge and mentor for Startup Chile, Ganas Ventures and the Hult Prize. In December 2020 he received funding from the Rockefeller Foundation for an earlier venture. He writes a newsletter on AI and productivity with more than 31,000 subscribers and reaches 14,000+ followers on LinkedIn — the channel that brought Limly its first 5,700 users without a dollar of advertising.",
+"about.f2name":"Pierre Baldera","about.f2role":"Co-founder · CTO",
+"about.rech":"Selected in 2026",
+"about.recp":"Between June and August 2026 Limly was selected into four independent international programmes.",
+"about.r1t":"Web Summit Rio",
+"about.r1d":"Top 20 of the Startup Showcase powered by Google for Startups, from more than 1,200 applicants.",
+"about.r2t":"Unicorn Factory Lisboa",
+"about.r2d":"Portfolio company — the only Peruvian startup in the current batch and the second in the accelerator's ten-year history.",
+"about.r3t":"AI Hub Lisbon",
+"about.r3d":"Our European base, through the Unicorn Factory Lisboa portfolio.",
+"about.f2bio":"Owns product, architecture, engineering and data. He is a systems engineer who spent three years building enterprise systems for Peruvian government public-health infrastructure, where reliability, security and data privacy are legal requirements rather than preferences — which is why Limly's on-device audio processing and AES-256 encryption were designed in from the first commit instead of added later. He took Limly from V1.0.0 to V1.3.10, shipped 50+ integrations, team workspaces, the admin panel, roles and permissions, the connected-memory engine and cross-history chat, and solved the hard part: real-time dual-channel audio separation with sub-two-second AI response, entirely on device, with no bot visible to anyone else on the call.",
+
+"what.h2":"What we do",
+"what.p":"A venture studio is not an incubator or a fund. We bring the idea, the code, the brand and the first customers. Every unit is born inside the holding and reaches the market with infrastructure already in place.",
+"what.c1t":"We find the problem","what.c1d":"Market research, competitor mapping and validation of real pain before a single line of code.",
+"what.c2t":"We build the product","what.c2d":"From idea to shipped product in days, not quarters. AI as execution infrastructure, not as a sales pitch.",
+"what.c3t":"We get the first dollar","what.c3d":"Brand, site, content and acquisition channel from day one. No unit exists until someone pays for it.",
+"what.c4t":"We scale or shut down","what.c4d":"What grows gets more resources. What doesn't work is switched off fast and without drama. Discipline is the asset.",
+
+"pf.h2":"Nine units, one holding",
+"pf.p":"Three units are in aggressive growth focus this quarter: Limly, Chass and Fluxo. The rest are operating, generating revenue or in validation.",
+"pf.focus":"Growth focus","pf.building":"In build","pf.validating":"In validation","pf.revenue":"Generating revenue",
+"pf.soon":"coming soon","pf.agency":"holding agency",
+"pf.limly":"Your AI chief of staff. It captures meetings with no bot in the call and turns every conversation into searchable memory, assigned tasks and drafted follow-ups. Mac, Windows and 60+ languages.",
+"pf.chass":"Cross-border payment infrastructure for LATAM. Charging and moving money between countries without the friction, delays and fees of traditional banking.",
+"pf.fluxo":"AI support for SaaS in 10 lines of code. Open source, native to React and Next.js: the agent learns from your team's answers and replies inside your product.",
+"pf.yarah":"A full C-level of AI agents: general management, marketing, finance, operations, legal, sales, growth and customer success. They think, research and execute nonstop.",
+"pf.praxon":"Technology development studio. Custom software, dashboards, ERP and process automation. International standard at nearshore cost.",
+"pf.marqa":"Trademark watch and protection. Analyses how similar your brand is to more than 120 million active records across 189 jurisdictions.",
+"pf.portada":"News agency and distribution network for the startup ecosystem. Stories in three languages, with country editions and pickup by partner outlets.",
+"pf.tramo":"Budget calculator for digital nomads: tell us how much you have and we tell you how many days it lasts and in which cities.",
+"pf.nova":"Marketing as a Service for startups and small businesses. Strategy, content, design, ads and automation: a full marketing department without hiring anyone.",
+
+"map.h2":"28 countries, one team",
+"map.p":"Our users are spread across the Americas, Europe, Asia and Oceania. So is the team: anyone joining the programme works with colleagues across several time zones and in three languages from week one.",
+
+"model.h2":"How we operate","model.p":"Six rules that apply equally to the unit generating revenue and to the one that doesn't exist yet.",
+"model.p1t":"Revenue first","model.p1d":"We don't raise capital before validating real income. The first customer is the only round that matters early on.",
+"model.p2t":"Shared infrastructure","model.p2d":"Brand, legal, design, automation and data live in the holding. A new unit starts with all of that solved.",
+"model.p3t":"Build in public","model.p3d":"We publish real numbers, not projections. Transparency is our cheapest acquisition channel.",
+"model.p4t":"AI as a team, not a tool","model.p4d":"Agents with a role, a goal and a metric. Every person here operates as if running a whole department.",
+"model.p5t":"Global from day one","model.p5d":"Everything is thought out in Spanish, English and Portuguese. No market is the ceiling.",
+"model.p6t":"Speed over perfection","model.p6d":"We prefer shipping today and fixing tomorrow. What never reaches the market learns nothing.",
+
+"int.h2":"Internship Programme 2026",
+"int.p":"22 openings in marketing, communications and operations. 12 weeks, renewable up to 24, fully remote, for university students from their 2nd to 8th semester. Certificate issued by Limly Labs LLC (Delaware, USA).",
+"int.cta":"I want to apply",
+"int.orgh":"How the team is organised",
+"int.orgp":"We're not looking for generic marketing interns. Everyone joins a squad assigned to a specific business unit, with its own metric. Twelve of the twenty-two openings sit with Limly, Chass and Fluxo, because visibility for those three is the priority this quarter.",
+"int.vac1":"opening","int.vacn":"openings","int.oncam":"On camera",
+"int.tableh":"Openings summary","int.thsquad":"Squad","int.thunit":"Business unit","int.tharea":"Area","int.thvac":"Openings","int.thtotal":"Programme total",
+"int.tablenote":"12 of the 22 openings are assigned to Limly, Chass and Fluxo: 55% of the team working on the three focus units.",
+
+"st.h2":"The stack you'll work with",
+"st.p":"You don't need to master all of it. You do need to be comfortable learning a new tool in an afternoon.",
+"st.b1t":"Design and video","st.b1d":"The visual backbone of the programme. Everything passes through here before publishing.",
+"st.b2t":"Content and AI","st.b2d":"AI writes the first draft. A person decides what gets published.",
+"st.b3t":"Social and publishing","st.b3d":"Scheduling, social listening and community management.",
+"st.b4t":"Automation","st.b4d":"Any process repeated twice becomes an automated flow.",
+"st.b5t":"Data and SEO","st.b5d":"No measurement, no decision. Every squad reports with numbers.",
+"st.b6t":"Daily operations","st.b6d":"Where the team's work lives: tasks, meetings and documentation.",
+
+"pr.h2":"Window of opportunity",
+"pr.p":"The call opens once per cohort and doesn't reopen until the next one. These are the six steps, from application to certificate.",
+"pr.s1":"Step 1","pr.s1t":"Application","pr.s1d":"A five-minute form with your details, your CV and a link to your portfolio or repository. No cover letter.",
+"pr.s2":"Step 2","pr.s2t":"Selection","pr.s2d":"We review every application. If you move forward, we email you a link to book your interview at a time that suits you.",
+"pr.s3":"Step 3","pr.s3t":"Interview","pr.s3d":"A 25-minute conversation with your squad lead and a co-founder. We talk about your experience, what you want to learn and your real availability during the academic term.",
+"pr.s4":"Step 4","pr.s4t":"Onboarding","pr.s4d":"If you're selected you sign the programme documents, receive access to the tools, get assigned to a squad and agree on your metric for the period.",
+"pr.s5":"Step 5","pr.s5t":"Programme","pr.s5d":"12 weeks of remote work, 12 to 15 hours per week with flexible scheduling. One squad meeting a week, and no deliverables during exam weeks.",
+"pr.s6":"Step 6","pr.s6t":"Close and renewal","pr.s6d":"Final review and certificate. The internship is renewable: you can extend for a second period and accumulate up to 24 certified weeks in the same programme.",
+
+"bn.h2":"What you get",
+"bn.p":"This is an unpaid internship. We say it first and plainly, so you decide with full information. In return, this is what we do give.",
+"bn.certh":"A certificate issued by a US company",
+"bn.certp":"On completing the programme you receive a certificate issued by Limly Labs LLC, a company registered in Delaware, United States. It isn't a generic participation slip: it documents what you did, with what results, and it's verifiable by your university and by any employer inside or outside your country.",
+"bn.cert1":"12 certified weeks, with roughly 150 accredited hours per period",
+"bn.cert2":"Renewable for a second period: up to 24 accumulated weeks on the same certificate",
+"bn.cert3":"Details of the role, the business unit, the duties and the results achieved",
+"bn.cert4":"Issued in Spanish and English, with an online verification code",
+"bn.cert5":"Signed by a co-founder and by your direct squad lead",
+"bn.cert6":"Compatible with university internship accreditation: we complete the forms and agreements your faculty requires",
+"bn.culth":"A team from several countries in the same room",
+"bn.cultp":"We currently have interns in the United States, Venezuela, Argentina and Peru. That isn't trivia: it changes how you work and what you learn.",
+"bn.cult1":"You coordinate with colleagues across time zones and learn to work asynchronously",
+"bn.cult2":"You live with Spanish, English and Portuguese in daily work, not in a course",
+"bn.cult3":"You see how one message is adapted to markets with different cultures and slang",
+"bn.cult4":"You build a professional network that doesn't stop at your city limits",
+"bn.honest":"To be clear: there is no financial compensation during the programme. If you need income now, this call isn't for you and we'd rather say so before you invest time applying. If what you want is real experience, an international certificate and a way into a team that does pay once someone proves they contribute, here it is.",
+
+"rq.h2":"Requirements and application","rq.yes":"What we ask for","rq.no":"What we don't ask for",
+"rq.y1":"University student between the 2nd and 8th semester, in any field related to the role.",
+"rq.y2":"Real availability of 12 to 15 hours per week for 12 weeks.",
+"rq.y3":"Your own computer and a stable internet connection.",
+"rq.y4":"For content creator roles: willingness to record on camera.",
+"rq.y5":"At least one sample of previous work, even from a course or personal project.",
+"rq.y6":"Autonomy: nobody here will remind you three times about a deadline.",
+"rq.n1":"Previous work experience.","rq.n2":"A cover letter or an elaborately designed CV.",
+"rq.n3":"Attendance at a specific university.","rq.n4":"Mastery of every tool in the stack.",
+"rq.n5":"Living in a particular country. The programme is fully remote.","rq.n6":"Your GPA or academic ranking.",
+"rq.ctah":"Apply to the 2026 cohort",
+"rq.ctap":"Pick the squad and role that interest you most, or tick the option to adapt to any role. We'll get in touch by email.",
+"rq.ctab":"Go to the form",
+
+"ft.desc":"Global venture studio. We build and scale digital businesses with AI as core infrastructure.",
+"ft.focus":"Focus units","ft.pf":"Portfolio","ft.holding":"Holding",
+"ft.legal":"© 2026 LIMLY LABS LLC · Delaware, United States · Global remote team · Built before dawn."
+},
+
+pt:{
+"nav.about":"Sobre nós","nav.what":"O que fazemos","nav.portfolio":"Portfólio","nav.model":"Como operamos",
+"nav.internships":"Estágios","nav.benefits":"Benefícios","nav.apply":"Candidatar-se",
+
+"hero.eyebrow":"Venture studio · Delaware LLC · Equipa global e remota",
+"hero.h1":"Construímos empresas com IA, antes do amanhecer.",
+"hero.lead":"A Limly Labs não investe em startups: constrói-as. Nove unidades de negócio a operar sob o mesmo holding, com marca, infraestrutura e equipa partilhadas. Sem capital externo. Sem esperar autorização.",
+"hero.cta1":"Ver o portfólio","hero.cta2":"22 vagas de estágio",
+"stat.units":"Unidades de negócio ativas","stat.capital":"Capital externo levantado",
+"stat.countries":"Países com utilizadores registados","stat.langs":"Idiomas de operação (ES/EN/PT)",
+
+"about.h2":"Quem somos",
+"about.p1":"A Limly Labs é um venture studio global constituído como LLC no Delaware, Estados Unidos. Não temos sede: temos fusos horários. A equipa trabalha distribuída e o holding opera em três idiomas desde o primeiro dia.",
+"about.p2":"Foi fundada por duas pessoas que estudaram juntas na Universidad Peruana de Ciencias Aplicadas e que se cansaram de esperar. Uma vem do lado do negócio e do go-to-market; a outra, do produto e da engenharia. É essa mistura que permite que uma ideia se torne um produto em produção em poucos dias, e que cada unidade nasça já com marca, site, canal e preço definidos.",
+"about.f1name":"Michell Anyosa","about.f1role":"Cofundador · CEO",
+"about.f1bio":"Lidera go-to-market, fundraising, parcerias e comunidade. Antes da Limly trabalhou em crescimento e desenvolvimento de negócio dentro do ecossistema da Henry (YC S20), o maior bootcamp de programação em espanhol apoiado pela Y Combinator. Tem dois MBA, assessorou mais de 100 startups na América Latina e é jurado e mentor da Startup Chile, da Ganas Ventures e do Hult Prize. Em dezembro de 2020 recebeu financiamento da Fundação Rockefeller para um projeto anterior. Escreve uma newsletter sobre IA e produtividade com mais de 31.000 subscritores e alcança mais de 14.000 seguidores no LinkedIn: o canal que trouxe à Limly os seus primeiros 5.700 utilizadores sem um dólar de publicidade.",
+"about.f2name":"Pierre Baldera","about.f2role":"Cofundador · CTO",
+"about.rech":"Selecionados em 2026",
+"about.recp":"Entre junho e agosto de 2026, a Limly foi selecionada em quatro programas internacionais independentes.",
+"about.r1t":"Web Summit Rio",
+"about.r1d":"Top 20 do Startup Showcase impulsionado pela Google for Startups, entre mais de 1.200 candidaturas.",
+"about.r2t":"Unicorn Factory Lisboa",
+"about.r2d":"Empresa do portfólio: a única startup peruana do batch atual e a segunda nos dez anos de história da aceleradora.",
+"about.r3t":"AI Hub Lisbon",
+"about.r3d":"A nossa base europeia, através do portfólio da Unicorn Factory Lisboa.",
+"about.f2bio":"Responsável por produto, arquitetura, engenharia e dados. É engenheiro de sistemas e passou três anos a construir sistemas empresariais para a infraestrutura de saúde pública do Estado peruano, onde a fiabilidade, a segurança e a privacidade dos dados são requisitos legais e não preferências. Por isso o processamento de áudio no dispositivo e a encriptação AES-256 da Limly foram desenhados desde o primeiro commit e não acrescentados depois. Levou a Limly da versão 1.0.0 à 1.3.10, lançou mais de 50 integrações, os espaços de trabalho em equipa, o painel de administração, os papéis e permissões, o motor de memória ligada e o chat entre históricos, e resolveu a parte difícil: a separação de áudio em dois canais em tempo real com resposta de IA em menos de dois segundos, inteiramente no dispositivo e sem qualquer bot visível para o resto da chamada.",
+
+"what.h2":"O que fazemos",
+"what.p":"Um venture studio não é uma incubadora nem um fundo. Nós trazemos a ideia, o código, a marca e os primeiros clientes. Cada unidade nasce dentro do holding e chega ao mercado com a infraestrutura já montada.",
+"what.c1t":"Encontramos o problema","what.c1d":"Pesquisa de mercado, mapeamento da concorrência e validação de dor real antes de escrever uma linha de código.",
+"what.c2t":"Construímos o produto","what.c2d":"Da ideia ao produto em produção em dias, não em trimestres. IA como infraestrutura de execução, não como argumento de venda.",
+"what.c3t":"Conseguimos o primeiro dólar","what.c3d":"Marca, site, conteúdo e canal de aquisição desde o primeiro dia. Nenhuma unidade existe até alguém pagar por ela.",
+"what.c4t":"Escalamos ou fechamos","what.c4d":"O que cresce recebe mais recursos. O que não funciona é desligado depressa e sem drama. A disciplina é o ativo.",
+
+"pf.h2":"Nove unidades, um holding",
+"pf.p":"Três unidades estão em foco de crescimento agressivo neste trimestre: Limly, Chass e Fluxo. As restantes operam, faturam ou estão em validação.",
+"pf.focus":"Foco de crescimento","pf.building":"Em construção","pf.validating":"Em validação","pf.revenue":"A faturar",
+"pf.soon":"em breve","pf.agency":"agência do holding",
+"pf.limly":"O teu chief of staff com IA. Captura as reuniões sem colocar um bot na chamada e transforma cada conversa em memória pesquisável, tarefas atribuídas e follow-ups redigidos. Mac, Windows e mais de 60 idiomas.",
+"pf.chass":"Infraestrutura de pagamentos cross-border para a América Latina. Cobrar e mover dinheiro entre países sem a fricção, os prazos e as comissões da banca tradicional.",
+"pf.fluxo":"Suporte com IA para SaaS em 10 linhas de código. Open source, nativo de React e Next.js: o agente aprende com as respostas da equipa e responde dentro do produto.",
+"pf.yarah":"Um C-level completo de agentes de IA: direção geral, marketing, finanças, operações, jurídico, vendas, growth e customer success. Pensam, investigam e executam sem parar.",
+"pf.praxon":"Consultora de desenvolvimento tecnológico. Software à medida, dashboards, ERP e automação de processos. Padrão internacional a custo nearshore.",
+"pf.marqa":"Vigilância e proteção de marcas. Analisa a percentagem de semelhança da tua marca face a mais de 120 milhões de registos ativos em 189 países.",
+"pf.portada":"Agência de notícias e rede de distribuição para o ecossistema empreendedor. Notícias em três idiomas, com edições por país e replicação em meios parceiros.",
+"pf.tramo":"Calculadora de orçamento para nómadas digitais: diz-nos quanto tens e dizemos-te quantos dias dá e em que cidades.",
+"pf.nova":"Marketing as a Service para startups e PME. Estratégia, conteúdo, design, publicidade e automação: o departamento de marketing completo, sem contratar ninguém.",
+
+"map.h2":"28 países, uma só equipa",
+"map.p":"Os nossos utilizadores estão espalhados pelas Américas, Europa, Ásia e Oceania. A equipa também: quem entra no programa trabalha com colegas em vários fusos horários e em três idiomas desde a primeira semana.",
+
+"model.h2":"Como operamos","model.p":"Seis regras que se aplicam igualmente à unidade que fatura e àquela que ainda não existe.",
+"model.p1t":"Receita primeiro","model.p1d":"Não levantamos capital antes de validar receita real. O primeiro cliente é a única ronda que importa no início.",
+"model.p2t":"Infraestrutura partilhada","model.p2d":"Marca, jurídico, design, automações e dados vivem no holding. Uma unidade nova arranca com tudo isso resolvido.",
+"model.p3t":"Construir em público","model.p3d":"Publicamos números reais, não projeções. A transparência é o nosso canal de aquisição mais barato.",
+"model.p4t":"IA como equipa, não como ferramenta","model.p4d":"Agentes com função, objetivo e métrica. Cada pessoa opera como se dirigisse uma área inteira.",
+"model.p5t":"Global desde o primeiro dia","model.p5d":"Tudo é pensado em espanhol, inglês e português. Nenhum mercado é o teto.",
+"model.p6t":"Velocidade acima da perfeição","model.p6d":"Preferimos publicar hoje e corrigir amanhã. O que não chega ao mercado não aprende nada.",
+
+"int.h2":"Programa de Estágios 2026",
+"int.p":"22 vagas em marketing, comunicação e operações. 12 semanas renováveis até 24, 100% remoto, para estudantes universitários do 2.º ao 8.º semestre. Certificado emitido pela Limly Labs LLC (Delaware, EUA).",
+"int.cta":"Quero candidatar-me",
+"int.orgh":"Como está organizada a equipa",
+"int.orgp":"Não procuramos estagiários de marketing genéricos. Cada pessoa entra num squad atribuído a uma unidade de negócio concreta, com uma métrica própria. Doze das vinte e duas vagas estão concentradas na Limly, Chass e Fluxo, porque a prioridade do trimestre é a visibilidade dessas três.",
+"int.vac1":"vaga","int.vacn":"vagas","int.oncam":"Frente à câmara",
+"int.tableh":"Resumo de vagas","int.thsquad":"Squad","int.thunit":"Unidade de negócio","int.tharea":"Área","int.thvac":"Vagas","int.thtotal":"Total do programa",
+"int.tablenote":"12 das 22 vagas estão atribuídas à Limly, Chass e Fluxo: 55% da equipa a trabalhar nas três unidades em foco.",
+
+"st.h2":"O stack com que vais trabalhar",
+"st.p":"Não é preciso dominar tudo. É preciso não ter medo de aprender uma ferramenta nova numa tarde.",
+"st.b1t":"Design e vídeo","st.b1d":"A base visual do programa. Tudo passa por aqui antes de ser publicado.",
+"st.b2t":"Conteúdo e IA","st.b2d":"A IA escreve o primeiro rascunho. A pessoa decide o que é publicado.",
+"st.b3t":"Redes e publicação","st.b3d":"Agendamento, escuta social e gestão de comunidade.",
+"st.b4t":"Automação","st.b4d":"Qualquer processo repetido duas vezes torna-se um fluxo automático.",
+"st.b5t":"Dados e SEO","st.b5d":"Sem medição não há decisão. Cada squad reporta com números.",
+"st.b6t":"Operação diária","st.b6d":"Onde vive o trabalho da equipa: tarefas, reuniões e documentação.",
+
+"pr.h2":"Janela de oportunidades",
+"pr.p":"A convocatória abre uma vez por cohorte e não reabre até à seguinte. Estes são os seis passos, da candidatura ao certificado.",
+"pr.s1":"Passo 1","pr.s1t":"Candidatura","pr.s1d":"Formulário de cinco minutos com os teus dados, o teu CV e o link do teu portfólio ou repositório. Sem carta de apresentação.",
+"pr.s2":"Passo 2","pr.s2t":"Seleção","pr.s2d":"Revemos todas as candidaturas. Se avançares, escrevemos-te por email com um link para agendares a entrevista no horário que te convier.",
+"pr.s3":"Passo 3","pr.s3t":"Entrevista","pr.s3d":"Conversa de 25 minutos com o responsável do teu squad e um cofundador. Falamos da tua experiência, do que queres aprender e da tua disponibilidade real durante o semestre.",
+"pr.s4":"Passo 4","pr.s4t":"Integração","pr.s4d":"Se fores selecionado assinas os documentos do programa, recebes os acessos às ferramentas, és atribuído a um squad e define-se o teu indicador do período.",
+"pr.s5":"Passo 5","pr.s5t":"Programa","pr.s5d":"12 semanas de trabalho remoto, entre 12 e 15 horas por semana com horário flexível. Uma reunião de squad por semana e semana sem entregas durante as épocas de exames.",
+"pr.s6":"Passo 6","pr.s6t":"Encerramento e renovação","pr.s6d":"Avaliação final e entrega do certificado. O estágio é renovável: podes prolongá-lo por um segundo período e acumular até 24 semanas certificadas no mesmo programa.",
+
+"bn.h2":"O que recebes",
+"bn.p":"Este é um estágio não remunerado. Dizemo-lo primeiro e sem rodeios, para que decidas com toda a informação. Em troca, é isto que entregamos.",
+"bn.certh":"Certificado emitido por uma empresa norte-americana",
+"bn.certp":"Ao concluir o programa recebes um certificado emitido pela Limly Labs LLC, sociedade registada no Delaware, Estados Unidos. Não é uma declaração genérica de participação: documenta o que fizeste, com que resultados, e é verificável pela tua universidade e por qualquer empregador dentro ou fora do teu país.",
+"bn.cert1":"12 semanas certificadas, com cerca de 150 horas creditadas por período",
+"bn.cert2":"Renovável por um segundo período: até 24 semanas acumuladas no mesmo certificado",
+"bn.cert3":"Detalhe da função, da unidade de negócio, das tarefas e dos resultados obtidos",
+"bn.cert4":"Emitido em espanhol e inglês, com código de verificação online",
+"bn.cert5":"Assinado por um cofundador e pelo responsável direto do teu squad",
+"bn.cert6":"Compatível com a acreditação de estágio curricular: preenchemos os formulários e protocolos que a tua faculdade exigir",
+"bn.culth":"Uma equipa de vários países na mesma sala",
+"bn.cultp":"Temos hoje estagiários nos Estados Unidos, Venezuela, Argentina e Peru. Isso não é um detalhe: muda a forma como trabalhas e o que aprendes.",
+"bn.cult1":"Coordenas com colegas em fusos horários diferentes e aprendes a trabalhar de forma assíncrona",
+"bn.cult2":"Convives com espanhol, inglês e português no trabalho diário, não num curso",
+"bn.cult3":"Vês como a mesma mensagem se adapta a mercados com culturas e gírias distintas",
+"bn.cult4":"Constróis uma rede profissional que não pára na fronteira da tua cidade",
+"bn.honest":"Para ser claro: não há remuneração durante o programa. Se precisas de rendimento agora, esta convocatória não é para ti e preferimos dizê-lo antes de investires tempo a candidatar-te. Se o que procuras é experiência real, um certificado internacional e uma porta de entrada para uma equipa que paga quando alguém prova que contribui, aqui está.",
+
+"rq.h2":"Requisitos e candidatura","rq.yes":"O que pedimos","rq.no":"O que não pedimos",
+"rq.y1":"Estudante universitário do 2.º ao 8.º semestre, em qualquer curso relacionado com a função.",
+"rq.y2":"Disponibilidade real de 12 a 15 horas por semana durante 12 semanas.",
+"rq.y3":"Computador próprio e ligação estável à internet.",
+"rq.y4":"Para as funções de criador de conteúdo: disponibilidade para gravar frente à câmara.",
+"rq.y5":"Pelo menos uma amostra de trabalho anterior, mesmo que de uma cadeira ou projeto pessoal.",
+"rq.y6":"Autonomia: aqui ninguém te vai lembrar três vezes de uma entrega.",
+"rq.n1":"Experiência profissional anterior.","rq.n2":"Carta de apresentação nem CV com design elaborado.",
+"rq.n3":"Que estudes numa universidade específica.","rq.n4":"Que já domines todas as ferramentas do stack.",
+"rq.n5":"Que vivas num país determinado. O programa é 100% remoto.","rq.n6":"Média final nem ranking académico.",
+"rq.ctah":"Candidata-te à cohorte 2026",
+"rq.ctap":"Escolhe o squad e a função que mais te interessam, ou marca a opção de te adaptares a qualquer função. Entraremos em contacto por email.",
+"rq.ctab":"Ir para o formulário",
+
+"ft.desc":"Venture studio global. Construímos e escalamos negócios digitais com IA como infraestrutura central.",
+"ft.focus":"Unidades em foco","ft.pf":"Portfólio","ft.holding":"Holding",
+"ft.legal":"© 2026 LIMLY LABS LLC · Delaware, Estados Unidos · Equipa global e remota · Construímos antes do amanhecer."
+}
+};
+
+/* =========================================================
+   SQUADS Y PERFILES  (22 vacantes)
+   ========================================================= */
+var SQUADS = [
+{
+ id:"limly", name:"Squad Limly", total:5,
+ unit:{es:"Limly",en:"Limly",pt:"Limly"},
+ area:{es:"Contenido, comunidad, diseño y product marketing",en:"Content, community, design and product marketing",pt:"Conteúdo, comunidade, design e product marketing"},
+ metric:{es:"Métrica del squad: descargas de la app + alcance orgánico",en:"Squad metric: app downloads + organic reach",pt:"Métrica do squad: downloads da app + alcance orgânico"},
+ roles:[
+  {n:2,onCamera:true,
+   title:{es:"Creador de contenido frente a cámara",en:"On-camera content creator",pt:"Criador de conteúdo frente à câmara"},
+   desc:{es:"Producir 12 a 16 piezas semanales de video vertical apareciendo tú frente a cámara, mostrando cómo Limly resuelve el caos de las reuniones.",en:"Produce 12 to 16 vertical videos a week, appearing on camera yourself, showing how Limly fixes meeting chaos.",pt:"Produzir 12 a 16 peças semanais de vídeo vertical, aparecendo tu frente à câmara, a mostrar como a Limly resolve o caos das reuniões."},
+   bullets:{
+    es:["Guionizar y grabar hooks de 3 segundos, con tu propia voz y cara","Probar cuatro formatos por semana y quedarte con el que retiene","Leer las métricas de retención y decidir qué se repite"],
+    en:["Script and record 3-second hooks, in your own voice and face","Test four formats a week and keep the one that retains","Read retention metrics and decide what gets repeated"],
+    pt:["Escrever e gravar hooks de 3 segundos, com a tua voz e cara","Testar quatro formatos por semana e ficar com o que retém","Ler as métricas de retenção e decidir o que se repete"]},
+   stack:["CapCut","Screen Studio","Descript","TikTok Creative Center","Metricool"],
+   cycle:{es:"Ideal: Comunicaciones, Audiovisual, Publicidad · 3.º–8.º ciclo",en:"Ideal: Communications, Media Production, Advertising · 3rd–8th semester",pt:"Ideal: Comunicação, Audiovisual, Publicidade · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Community manager EN/ES",en:"Community manager EN/ES",pt:"Community manager EN/ES"},
+   desc:{es:"Llevar la voz de Limly en LinkedIn y X hacia una audiencia B2B y tech, mayoritariamente en inglés.",en:"Run Limly's voice on LinkedIn and X for a B2B and tech audience, mostly in English.",pt:"Levar a voz da Limly no LinkedIn e no X para uma audiência B2B e tech, sobretudo em inglês."},
+   bullets:{
+    es:["Calendario editorial semanal en dos idiomas","Respuesta a comentarios y mensajes en menos de cuatro horas","Detectar las conversaciones donde la marca debe aparecer"],
+    en:["Weekly editorial calendar in two languages","Replies to comments and DMs within four hours","Spot the conversations the brand should be in"],
+    pt:["Calendário editorial semanal em dois idiomas","Resposta a comentários e mensagens em menos de quatro horas","Detetar as conversas onde a marca deve aparecer"]},
+   stack:["LinkedIn","Buffer","Notion","Claude","Canva"],
+   cycle:{es:"Ideal: Comunicaciones, Marketing, Traducción · inglés B2+ · 4.º–8.º ciclo",en:"Ideal: Communications, Marketing, Translation · English B2+ · 4th–8th semester",pt:"Ideal: Comunicação, Marketing, Tradução · inglês B2+ · 4.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Diseño y motion",en:"Design and motion",pt:"Design e motion"},
+   desc:{es:"Piezas gráficas, carruseles, plantillas de post y micro-animaciones para producto y redes, respetando el sistema visual de la marca.",en:"Graphics, carousels, post templates and micro-animations for product and social, within the brand system.",pt:"Peças gráficas, carrosséis, templates de post e micro-animações para produto e redes, dentro do sistema visual da marca."},
+   bullets:{
+    es:["Sistema de plantillas reutilizables en Figma","Animaciones cortas de funcionalidades y capturas de producto","Assets para landing, changelog y tiendas de aplicaciones"],
+    en:["A reusable template system in Figma","Short animations of features and product captures","Assets for landing, changelog and app stores"],
+    pt:["Sistema de templates reutilizáveis no Figma","Animações curtas de funcionalidades e capturas de produto","Assets para landing, changelog e lojas de aplicações"]},
+   stack:["Figma","After Effects","Canva","Photoshop"],
+   cycle:{es:"Ideal: Diseño Gráfico, Comunicación Audiovisual · 3.º–8.º ciclo",en:"Ideal: Graphic Design, Media Production · 3rd–8th semester",pt:"Ideal: Design Gráfico, Comunicação Audiovisual · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Product marketing junior",en:"Junior product marketing",pt:"Product marketing júnior"},
+   desc:{es:"Traducir funcionalidades en casos de uso entendibles: investigar competencia, escribir copy de landing y armar los materiales que usa ventas.",en:"Turn features into understandable use cases: research competitors, write landing copy and build the materials sales uses.",pt:"Traduzir funcionalidades em casos de uso compreensíveis: investigar concorrência, escrever copy de landing e montar os materiais que as vendas usam."},
+   bullets:{
+    es:["Benchmark mensual de competidores y su mensaje","Entrevistas cortas a usuarios y extracción de frases reales","Copy de páginas, correos de onboarding y one-pagers"],
+    en:["Monthly competitor and messaging benchmark","Short user interviews and extraction of real quotes","Copy for pages, onboarding emails and one-pagers"],
+    pt:["Benchmark mensal de concorrentes e da sua mensagem","Entrevistas curtas a utilizadores e recolha de frases reais","Copy de páginas, emails de onboarding e one-pagers"]},
+   stack:["Notion","Claude","Google Analytics 4","Figma"],
+   cycle:{es:"Ideal: Marketing, Administración, Comunicaciones · 5.º–8.º ciclo",en:"Ideal: Marketing, Business, Communications · 5th–8th semester",pt:"Ideal: Marketing, Gestão, Comunicação · 5.º–8.º semestre"}}
+ ]},
+
+{
+ id:"chass", name:"Squad Chass", total:3,
+ unit:{es:"Chass",en:"Chass",pt:"Chass"},
+ area:{es:"Contenido y comunidad",en:"Content and community",pt:"Conteúdo e comunidade"},
+ metric:{es:"Métrica del squad: registros en lista de espera + menciones",en:"Squad metric: waitlist signups + mentions",pt:"Métrica do squad: registos na lista de espera + menções"},
+ roles:[
+  {n:2,onCamera:true,
+   title:{es:"Creador de contenido frente a cámara",en:"On-camera content creator",pt:"Criador de conteúdo frente à câmara"},
+   desc:{es:"Educación financiera aplicada, explicada por ti frente a cámara: comisiones ocultas, tipo de cambio, cobrar desde el extranjero. Un tema difícil en 30 segundos.",en:"Applied financial education, explained by you on camera: hidden fees, exchange rates, getting paid from abroad. A hard topic in 30 seconds.",pt:"Educação financeira aplicada, explicada por ti frente à câmara: comissões ocultas, taxa de câmbio, receber do estrangeiro. Um tema difícil em 30 segundos."},
+   bullets:{
+    es:["Series recurrentes con formato fijo y presentador reconocible","Contenido reactivo sobre noticias de tipo de cambio y remesas","Adaptar cada pieza a Perú, México y Colombia"],
+    en:["Recurring series with a fixed format and a recognisable host","Reactive content on exchange-rate and remittance news","Adapt every piece to Peru, Mexico and Colombia"],
+    pt:["Séries recorrentes com formato fixo e apresentador reconhecível","Conteúdo reativo sobre notícias de câmbio e remessas","Adaptar cada peça ao Peru, México e Colômbia"]},
+   stack:["CapCut","Canva","Metricool","ElevenLabs","Notion"],
+   cycle:{es:"Ideal: Comunicaciones, Economía, Marketing · 3.º–8.º ciclo",en:"Ideal: Communications, Economics, Marketing · 3rd–8th semester",pt:"Ideal: Comunicação, Economia, Marketing · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Community y soporte de marca",en:"Community and brand support",pt:"Comunidade e suporte de marca"},
+   desc:{es:"Gestionar comunidad en Instagram, TikTok y WhatsApp. En fintech la confianza se construye respondiendo rápido y sin jerga.",en:"Run community on Instagram, TikTok and WhatsApp. In fintech trust is built by replying fast and without jargon.",pt:"Gerir comunidade no Instagram, TikTok e WhatsApp. Em fintech a confiança constrói-se a responder depressa e sem jargão."},
+   bullets:{
+    es:["Moderación y respuesta con tono claro y verificable","Recolectar dudas frecuentes para alimentar el FAQ","Reporte semanal de sentimiento y objeciones"],
+    en:["Moderation and replies in a clear, verifiable tone","Collect recurring questions to feed the FAQ","Weekly sentiment and objections report"],
+    pt:["Moderação e resposta com tom claro e verificável","Recolher dúvidas frequentes para alimentar o FAQ","Relatório semanal de sentimento e objeções"]},
+   stack:["Meta Business Suite","WhatsApp Business","Notion","Canva"],
+   cycle:{es:"Ideal: Comunicaciones, Administración, Psicología · 2.º–8.º ciclo",en:"Ideal: Communications, Business, Psychology · 2nd–8th semester",pt:"Ideal: Comunicação, Gestão, Psicologia · 2.º–8.º semestre"}}
+ ]},
+
+{
+ id:"fluxo", name:"Squad Fluxo", total:4,
+ unit:{es:"Fluxo",en:"Fluxo",pt:"Fluxo"},
+ area:{es:"Contenido y comunidad",en:"Content and community",pt:"Conteúdo e comunidade"},
+ metric:{es:"Métrica del squad: instalaciones del paquete + comunidad de desarrolladores",en:"Squad metric: package installs + developer community",pt:"Métrica do squad: instalações do pacote + comunidade de programadores"},
+ roles:[
+  {n:3,onCamera:true,
+   title:{es:"Creador de contenido frente a cámara",en:"On-camera content creator",pt:"Criador de conteúdo frente à câmara"},
+   desc:{es:"Convertir un producto técnico en contenido que la gente ve hasta el final. Tú frente a cámara explicando por qué el soporte de un SaaS no debería tomar tres días.",en:"Turn a technical product into content people watch to the end. You on camera explaining why SaaS support shouldn't take three days.",pt:"Transformar um produto técnico em conteúdo que as pessoas veem até ao fim. Tu frente à câmara a explicar porque é que o suporte de um SaaS não devia demorar três dias."},
+   bullets:{
+    es:["Piezas cortas de producto: instalar, configurar, ver el resultado","Contenido en inglés para audiencia de producto y tecnología","Clips por cada lanzamiento del changelog"],
+    en:["Short product pieces: install, configure, see the result","English content for a product and tech audience","Clips for every changelog release"],
+    pt:["Peças curtas de produto: instalar, configurar, ver o resultado","Conteúdo em inglês para audiência de produto e tecnologia","Clips por cada lançamento do changelog"]},
+   stack:["CapCut","Screen Studio","OBS","Descript","Metricool"],
+   cycle:{es:"Ideal: Comunicaciones, Audiovisual, Sistemas · inglés intermedio · 3.º–8.º ciclo",en:"Ideal: Communications, Media, Systems · intermediate English · 3rd–8th semester",pt:"Ideal: Comunicação, Audiovisual, Sistemas · inglês intermédio · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Community manager",en:"Community manager",pt:"Community manager"},
+   desc:{es:"Sostener la conversación alrededor de un producto open source: responder, agradecer, moderar y traer de vuelta a quien probó y se fue.",en:"Hold the conversation around an open-source product: reply, thank, moderate and bring back whoever tried it and left.",pt:"Sustentar a conversa à volta de um produto open source: responder, agradecer, moderar e trazer de volta quem experimentou e saiu."},
+   bullets:{
+    es:["Presencia diaria en X, Discord y comunidades de producto","Recopilar feedback de usuarios y llevarlo al equipo","Calendario de publicaciones alrededor de cada versión"],
+    en:["Daily presence on X, Discord and product communities","Collect user feedback and take it to the team","Publishing calendar around each release"],
+    pt:["Presença diária no X, Discord e comunidades de produto","Recolher feedback dos utilizadores e levá-lo à equipa","Calendário de publicações à volta de cada versão"]},
+   stack:["X","Discord","Notion","Buffer","Claude"],
+   cycle:{es:"Ideal: Comunicaciones, Marketing, Sistemas · inglés B2+ · 4.º–8.º ciclo",en:"Ideal: Communications, Marketing, Systems · English B2+ · 4th–8th semester",pt:"Ideal: Comunicação, Marketing, Sistemas · inglês B2+ · 4.º–8.º semestre"}}
+ ]},
+
+{
+ id:"portafolio", name:"Squad Portafolio", total:6,
+ unit:{es:"Portada, Marqa, Tramo, Praxon, Yarah, Nova Star",en:"Portada, Marqa, Tramo, Praxon, Yarah, Nova Star",pt:"Portada, Marqa, Tramo, Praxon, Yarah, Nova Star"},
+ area:{es:"Editorial, contenido, SEO, email y diseño",en:"Editorial, content, SEO, email and design",pt:"Editorial, conteúdo, SEO, email e design"},
+ metric:{es:"Cubre las seis unidades fuera del foco de crecimiento",en:"Covers the six units outside the growth focus",pt:"Cobre as seis unidades fora do foco de crescimento"},
+ roles:[
+  {n:2,onCamera:false,
+   title:{es:"Redactor editorial",en:"Editorial writer",pt:"Redator editorial"},
+   desc:{es:"Escribir y editar notas del ecosistema emprendedor con criterio periodístico: verificar, citar fuentes y publicar en tres idiomas.",en:"Write and edit startup-ecosystem stories with journalistic standards: verify, cite sources and publish in three languages.",pt:"Escrever e editar notícias do ecossistema empreendedor com critério jornalístico: verificar, citar fontes e publicar em três idiomas."},
+   bullets:{
+    es:["Dos a tres notas diarias con edición y verificación previa","Contacto con startups y redacciones aliadas","Newsletter diaria por país"],
+    en:["Two to three stories a day, edited and fact-checked","Contact with startups and partner newsrooms","Daily newsletter per country"],
+    pt:["Duas a três notícias diárias com edição e verificação prévia","Contacto com startups e redações parceiras","Newsletter diária por país"]},
+   stack:["CMS propio","Claude","Google Trends","Beehiiv"],
+   cycle:{es:"Ideal: Periodismo, Comunicaciones, Literatura · 3.º–8.º ciclo",en:"Ideal: Journalism, Communications, Literature · 3rd–8th semester",pt:"Ideal: Jornalismo, Comunicação, Literatura · 3.º–8.º semestre"}},
+  {n:2,onCamera:true,
+   title:{es:"Creador de contenido frente a cámara",en:"On-camera content creator",pt:"Criador de conteúdo frente à câmara"},
+   desc:{es:"Dar cara y voz a las unidades del portafolio: registro de marcas, presupuesto de viaje, noticias del ecosistema y automatización para empresas.",en:"Put a face and a voice on the portfolio units: trademarks, travel budgeting, ecosystem news and business automation.",pt:"Dar cara e voz às unidades do portfólio: registo de marcas, orçamento de viagem, notícias do ecossistema e automação para empresas."},
+   bullets:{
+    es:["Formatos propios por marca, no la misma plantilla para todas","Contenido de divulgación a partir de las notas y datos del portafolio","Piezas para redes y para las landings de cada unidad"],
+    en:["Distinct formats per brand, not one template for all","Explainer content built from portfolio stories and data","Pieces for social and for each unit's landing pages"],
+    pt:["Formatos próprios por marca, não o mesmo template para todas","Conteúdo de divulgação a partir das notícias e dados do portfólio","Peças para redes e para as landings de cada unidade"]},
+   stack:["CapCut","Canva","Metricool","Descript"],
+   cycle:{es:"Ideal: Comunicaciones, Audiovisual, Marketing · 3.º–8.º ciclo",en:"Ideal: Communications, Media, Marketing · 3rd–8th semester",pt:"Ideal: Comunicação, Audiovisual, Marketing · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"SEO y ciclo de vida",en:"SEO and lifecycle",pt:"SEO e ciclo de vida"},
+   desc:{es:"Posicionar Marqa, Tramo y Praxon en buscadores, y construir los correos que convierten un registro en usuario activo.",en:"Rank Marqa, Tramo and Praxon in search, and build the emails that turn a signup into an active user.",pt:"Posicionar Marqa, Tramo e Praxon nos motores de busca, e construir os emails que convertem um registo em utilizador ativo."},
+   bullets:{
+    es:["Mapa de palabras clave por país e idioma","Redacción y optimización on-page","Secuencias de bienvenida, activación y reactivación"],
+    en:["Keyword map by country and language","On-page writing and optimisation","Welcome, activation and win-back sequences"],
+    pt:["Mapa de palavras-chave por país e idioma","Redação e otimização on-page","Sequências de boas-vindas, ativação e reativação"]},
+   stack:["Search Console","Ahrefs","Semrush","Resend","Beehiiv"],
+   cycle:{es:"Ideal: Marketing, Comunicaciones, Sistemas · 4.º–8.º ciclo",en:"Ideal: Marketing, Communications, Systems · 4th–8th semester",pt:"Ideal: Marketing, Comunicação, Sistemas · 4.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Diseño multimarca",en:"Multi-brand design",pt:"Design multimarca"},
+   desc:{es:"Sostener la coherencia visual de seis marcas distintas sin que ninguna se parezca a otra.",en:"Hold the visual coherence of six different brands without any of them looking alike.",pt:"Sustentar a coerência visual de seis marcas distintas sem que nenhuma se pareça com outra."},
+   bullets:{
+    es:["Kits de plantillas por marca en Figma","Presentaciones comerciales y propuestas de Nova Star","Adaptación de campañas a cada formato y red"],
+    en:["Template kits per brand in Figma","Sales decks and Nova Star proposals","Adapting campaigns to each format and network"],
+    pt:["Kits de templates por marca no Figma","Apresentações comerciais e propostas da Nova Star","Adaptação de campanhas a cada formato e rede"]},
+   stack:["Figma","Illustrator","Canva","Midjourney"],
+   cycle:{es:"Ideal: Diseño Gráfico, Publicidad · 3.º–8.º ciclo",en:"Ideal: Graphic Design, Advertising · 3rd–8th semester",pt:"Ideal: Design Gráfico, Publicidade · 3.º–8.º semestre"}}
+ ]},
+
+{
+ id:"operaciones", name:"Squad Operaciones", total:4,
+ unit:{es:"Transversal a las nueve unidades",en:"Across all nine units",pt:"Transversal às nove unidades"},
+ area:{es:"Automatización, datos, coordinación y cultura",en:"Automation, data, coordination and culture",pt:"Automação, dados, coordenação e cultura"},
+ metric:{es:"Sostiene la operación de los otros cuatro squads",en:"Supports the operation of the other four squads",pt:"Sustenta a operação dos outros quatro squads"},
+ roles:[
+  {n:1,onCamera:false,
+   title:{es:"Automatización y marketing ops",en:"Automation and marketing ops",pt:"Automação e marketing ops"},
+   desc:{es:"Todo lo que se hace dos veces a mano se automatiza: formularios, CRM, hojas de cálculo y publicación de contenido.",en:"Anything done twice by hand gets automated: forms, CRM, spreadsheets and content publishing.",pt:"Tudo o que se faz duas vezes à mão é automatizado: formulários, CRM, folhas de cálculo e publicação de conteúdo."},
+   bullets:{
+    es:["Flujos entre las herramientas del holding","Automatización de reportes y alertas internas","Documentar cada flujo para que otro lo pueda mantener"],
+    en:["Flows between the holding's tools","Automated reports and internal alerts","Document every flow so someone else can maintain it"],
+    pt:["Fluxos entre as ferramentas do holding","Automação de relatórios e alertas internos","Documentar cada fluxo para que outro o possa manter"]},
+   stack:["n8n","Make","Zapier","Airtable","APIs / JSON"],
+   cycle:{es:"Ideal: Sistemas, Industrial, Marketing con perfil técnico · 4.º–8.º ciclo",en:"Ideal: Systems, Industrial Engineering, technical Marketing · 4th–8th semester",pt:"Ideal: Sistemas, Industrial, Marketing com perfil técnico · 4.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Datos y reportería",en:"Data and reporting",pt:"Dados e relatórios"},
+   desc:{es:"Un solo tablero donde el holding ve qué unidad crece y cuál no. Sin ese número, todo lo demás es opinión.",en:"One dashboard where the holding sees which unit is growing and which isn't. Without that number, everything else is opinion.",pt:"Um único painel onde o holding vê que unidade cresce e qual não. Sem esse número, tudo o resto é opinião."},
+   bullets:{
+    es:["Tablero consolidado de tráfico, registros y conversión","Reporte semanal por squad, con lectura y no solo cifras","Configuración de eventos y UTMs en cada landing"],
+    en:["Consolidated dashboard of traffic, signups and conversion","Weekly report per squad, with reading and not just figures","Event and UTM setup on every landing page"],
+    pt:["Painel consolidado de tráfego, registos e conversão","Relatório semanal por squad, com leitura e não só números","Configuração de eventos e UTMs em cada landing"]},
+   stack:["Looker Studio","Google Analytics 4","Sheets avanzado","SQL básico"],
+   cycle:{es:"Ideal: Estadística, Economía, Sistemas, Industrial · 4.º–8.º ciclo",en:"Ideal: Statistics, Economics, Systems, Industrial · 4th–8th semester",pt:"Ideal: Estatística, Economia, Sistemas, Industrial · 4.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Coordinación de proyectos",en:"Project coordination",pt:"Coordenação de projetos"},
+   desc:{es:"Que cada squad sepa qué entrega, cuándo y con qué. Detectar el atasco antes de que sea un problema.",en:"Making sure every squad knows what it delivers, when and with what. Spotting the blocker before it becomes a problem.",pt:"Garantir que cada squad sabe o que entrega, quando e com quê. Detetar o bloqueio antes de ser um problema."},
+   bullets:{
+    es:["Tableros de tareas y seguimiento de entregables","Agenda de reuniones semanales y minutas","Documentación de procesos en el manual interno"],
+    en:["Task boards and deliverable tracking","Weekly meeting agenda and minutes","Process documentation in the internal handbook"],
+    pt:["Quadros de tarefas e seguimento de entregáveis","Agenda de reuniões semanais e atas","Documentação de processos no manual interno"]},
+   stack:["Notion","Slack","Google Calendar","Limly"],
+   cycle:{es:"Ideal: Administración, Industrial, Comunicaciones · 3.º–8.º ciclo",en:"Ideal: Business, Industrial Engineering, Communications · 3rd–8th semester",pt:"Ideal: Gestão, Industrial, Comunicação · 3.º–8.º semestre"}},
+  {n:1,onCamera:false,
+   title:{es:"Comunicación interna y cultura",en:"Internal communications and culture",pt:"Comunicação interna e cultura"},
+   desc:{es:"Un equipo remoto repartido en varios países necesita un lugar donde enterarse de todo. Boletín interno, onboarding y registro del programa.",en:"A remote team across several countries needs one place to find out everything. Internal newsletter, onboarding and programme records.",pt:"Uma equipa remota espalhada por vários países precisa de um sítio para saber de tudo. Boletim interno, onboarding e registo do programa."},
+   bullets:{
+    es:["Boletín interno semanal con avances de cada squad","Onboarding y manual de bienvenida de nuevos pasantes","Contenido de marca empleadora para la siguiente cohorte"],
+    en:["Weekly internal newsletter with each squad's progress","Onboarding and welcome handbook for new interns","Employer-brand content for the next cohort"],
+    pt:["Boletim interno semanal com avanços de cada squad","Onboarding e manual de boas-vindas de novos estagiários","Conteúdo de marca empregadora para a próxima cohorte"]},
+   stack:["Notion","Canva","Slack","LinkedIn"],
+   cycle:{es:"Ideal: Comunicaciones, RR.HH., Psicología · 2.º–8.º ciclo",en:"Ideal: Communications, HR, Psychology · 2nd–8th semester",pt:"Ideal: Comunicação, RH, Psicologia · 2.º–8.º semestre"}}
+ ]}
+];
+
+/* ---------- beneficios ---------- */
+var BENEFITS = [
+{t:{es:"Carta de recomendación personalizada",en:"Personalised recommendation letter",pt:"Carta de recomendação personalizada"},
+ d:{es:"Escrita por quien te supervisó, con ejemplos concretos de tu trabajo. También una recomendación pública en tu perfil de LinkedIn.",en:"Written by whoever supervised you, with concrete examples of your work. Plus a public recommendation on your LinkedIn profile.",pt:"Escrita por quem te supervisionou, com exemplos concretos do teu trabalho. E uma recomendação pública no teu perfil de LinkedIn."}},
+{t:{es:"Portafolio con trabajo real",en:"A portfolio of real work",pt:"Portfólio com trabalho real"},
+ d:{es:"Sales con piezas publicadas, campañas medidas y resultados que puedes mostrar. No con ejercicios de clase.",en:"You leave with published pieces, measured campaigns and results you can show. Not class exercises.",pt:"Sais com peças publicadas, campanhas medidas e resultados que podes mostrar. Não exercícios de aula."}},
+{t:{es:"Acceso a herramientas de pago",en:"Access to paid tools",pt:"Acesso a ferramentas pagas"},
+ d:{es:"Licencias del holding durante todo el programa: IA, diseño, edición, analítica y automatización. Ninguna la pagas tú.",en:"The holding's licences for the whole programme: AI, design, editing, analytics and automation. You pay for none of them.",pt:"Licenças do holding durante todo o programa: IA, design, edição, analítica e automação. Nenhuma pagas tu."}},
+{t:{es:"Mentoría directa con los fundadores",en:"Direct mentoring from the founders",pt:"Mentoria direta com os fundadores"},
+ d:{es:"Sesión semanal de squad y una conversación uno a uno al mes. Sin capas intermedias entre tú y quien toma las decisiones.",en:"A weekly squad session and a one-to-one every month. No layers between you and the people making decisions.",pt:"Sessão semanal de squad e uma conversa individual por mês. Sem camadas entre ti e quem decide."}},
+{t:{es:"Formación en IA aplicada",en:"Training in applied AI",pt:"Formação em IA aplicada"},
+ d:{es:"Cómo trabajar con agentes, automatizar procesos y usar IA en el flujo diario. Es el modo en que opera todo el holding.",en:"How to work with agents, automate processes and use AI in the daily flow. It's how the whole holding operates.",pt:"Como trabalhar com agentes, automatizar processos e usar IA no fluxo diário. É assim que todo o holding opera."}},
+{t:{es:"Experiencia internacional",en:"International experience",pt:"Experiência internacional"},
+ d:{es:"Trabajas en tres idiomas para usuarios en 28 países. Eso pesa distinto en un CV que una práctica local.",en:"You work in three languages for users in 28 countries. That reads differently on a CV than a local internship.",pt:"Trabalhas em três idiomas para utilizadores em 28 países. Isso pesa de forma diferente num CV do que um estágio local."}},
+{t:{es:"Continuidad remunerada",en:"Paid continuity",pt:"Continuidade remunerada"},
+ d:{es:"Quien destaca sigue como colaborador por proyecto, con pago, al terminar el programa. Es el camino previsto, no una promesa vaga.",en:"Whoever stands out continues as a paid project collaborator after the programme. It's the planned path, not a vague promise.",pt:"Quem se destaca continua como colaborador por projeto, com pagamento, após o programa. É o caminho previsto, não uma promessa vaga."}},
+{t:{es:"Horario compatible con la universidad",en:"University-friendly schedule",pt:"Horário compatível com a universidade"},
+ d:{es:"100% remoto, entregas por resultado y no por horas conectadas. Semana sin entregas durante parciales y finales.",en:"Fully remote, delivery by outcome and not by hours online. No deliverables during midterms and finals.",pt:"100% remoto, entregas por resultado e não por horas ligado. Semana sem entregas durante frequências e exames."}},
+{t:{es:"Crédito público en el trabajo",en:"Public credit for your work",pt:"Crédito público no trabalho"},
+ d:{es:"Firma en las notas de Portada, mención en los créditos de las campañas y presencia en la página de equipo del holding.",en:"A byline on Portada stories, credit on campaigns and a place on the holding's team page.",pt:"Assinatura nas notícias da Portada, menção nos créditos das campanhas e presença na página de equipa do holding."}},
+{t:{es:"Rotación entre unidades",en:"Rotation between units",pt:"Rotação entre unidades"},
+ d:{es:"A partir de la semana seis puedes pedir rotar a otro squad si quieres probar un área distinta.",en:"From week six you can ask to rotate to another squad if you want to try a different area.",pt:"A partir da semana seis podes pedir rotação para outro squad se quiseres experimentar outra área."}},
+{t:{es:"Certificaciones oficiales",en:"Official certifications",pt:"Certificações oficiais"},
+ d:{es:"Acompañamos las certificaciones gratuitas que quieras rendir durante el programa: Google Analytics, Meta Blueprint, HubSpot.",en:"We support the free certifications you want to take during the programme: Google Analytics, Meta Blueprint, HubSpot.",pt:"Acompanhamos as certificações gratuitas que queiras fazer durante o programa: Google Analytics, Meta Blueprint, HubSpot."}},
+{t:{es:"Red del ecosistema",en:"Ecosystem network",pt:"Rede do ecossistema"},
+ d:{es:"Contacto con founders, medios aliados y clientes de las unidades. La red suele ser lo que abre la siguiente puerta.",en:"Contact with founders, partner media and the units' clients. The network is usually what opens the next door.",pt:"Contacto com founders, meios parceiros e clientes das unidades. A rede é normalmente o que abre a porta seguinte."}}
+];
+
+/* ---------- países con usuarios (editable) ---------- */
+var COUNTRIES = [
+{es:"Estados Unidos",en:"United States",pt:"Estados Unidos",lat:39,lng:-98},
+{es:"Canadá",en:"Canada",pt:"Canadá",lat:56,lng:-106},
+{es:"México",en:"Mexico",pt:"México",lat:23,lng:-102},
+{es:"Guatemala",en:"Guatemala",pt:"Guatemala",lat:15.5,lng:-90.3},
+{es:"Costa Rica",en:"Costa Rica",pt:"Costa Rica",lat:9.7,lng:-84},
+{es:"Panamá",en:"Panama",pt:"Panamá",lat:8.5,lng:-80},
+{es:"República Dominicana",en:"Dominican Republic",pt:"República Dominicana",lat:18.7,lng:-70.2},
+{es:"Colombia",en:"Colombia",pt:"Colômbia",lat:4.6,lng:-74.3},
+{es:"Venezuela",en:"Venezuela",pt:"Venezuela",lat:8,lng:-66},
+{es:"Ecuador",en:"Ecuador",pt:"Equador",lat:-1.5,lng:-78.5},
+{es:"Perú",en:"Peru",pt:"Peru",lat:-9.2,lng:-75},
+{es:"Bolivia",en:"Bolivia",pt:"Bolívia",lat:-16.3,lng:-64.7},
+{es:"Chile",en:"Chile",pt:"Chile",lat:-33,lng:-70.7},
+{es:"Argentina",en:"Argentina",pt:"Argentina",lat:-34.6,lng:-64},
+{es:"Uruguay",en:"Uruguay",pt:"Uruguai",lat:-32.8,lng:-56},
+{es:"Paraguay",en:"Paraguay",pt:"Paraguai",lat:-23.4,lng:-58.4},
+{es:"Brasil",en:"Brazil",pt:"Brasil",lat:-12,lng:-51},
+{es:"España",en:"Spain",pt:"Espanha",lat:40.3,lng:-3.7},
+{es:"Portugal",en:"Portugal",pt:"Portugal",lat:39.5,lng:-8},
+{es:"Reino Unido",en:"United Kingdom",pt:"Reino Unido",lat:54,lng:-2},
+{es:"Francia",en:"France",pt:"França",lat:46.6,lng:2.4},
+{es:"Alemania",en:"Germany",pt:"Alemanha",lat:51,lng:10.4},
+{es:"Países Bajos",en:"Netherlands",pt:"Países Baixos",lat:52.2,lng:5.3},
+{es:"Italia",en:"Italy",pt:"Itália",lat:42.8,lng:12.6},
+{es:"Polonia",en:"Poland",pt:"Polónia",lat:52,lng:19.1},
+{es:"India",en:"India",pt:"Índia",lat:22,lng:79},
+{es:"Filipinas",en:"Philippines",pt:"Filipinas",lat:12.9,lng:121.8},
+{es:"Australia",en:"Australia",pt:"Austrália",lat:-25.3,lng:133.8}
+];
+
+/* ---------- mapa: índices de la grilla terrestre ---------- */
+var MAPDOTS = "34,35,40,48,49,50,51,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,97,98,99,101,140,210,213,214,217,220,221,222,225,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255,256,257,258,259,260,261,301,302,303,304,318,319,320,321,322,323,324,325,326,327,340,341,342,390,391,392,393,405,406,424,425,426,427,428,429,430,431,432,433,434,435,436,437,438,439,440,441,480,481,496,497,498,499,500,501,502,503,504,505,506,507,571,572,574,575,576,577,578,580,583,584,588,589,590,591,592,593,594,595,606,607,608,609,610,611,612,613,614,615,616,617,618,619,620,621,659,660,668,669,672,673,674,675,676,677,678,679,680,681,682,683,684,685,686,687,688,689,690,691,692,693,694,695,696,697,703,704,705,706,707,733,734,735,736,737,738,739,740,741,742,749,750,756,757,758,759,760,761,762,763,765,766,767,768,772,773,774,775,776,777,778,779,780,787,788,789,790,791,792,793,794,795,796,797,798,799,800,801,802,825,826,827,828,829,848,849,850,851,852,853,854,855,856,857,858,859,860,861,862,863,864,865,866,867,868,869,870,871,872,873,874,875,876,877,878,879,880,881,882,883,884,885,886,887,888,889,890,891,892,893,906,913,914,915,916,917,918,919,920,921,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937,941,942,943,946,948,949,950,952,953,954,957,959,960,961,962,969,970,971,972,973,974,975,976,977,978,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013,1014,1015,1018,1021,1022,1023,1024,1025,1026,1027,1028,1029,1030,1031,1033,1034,1035,1036,1037,1038,1039,1040,1041,1042,1043,1044,1045,1046,1047,1048,1049,1050,1051,1052,1053,1054,1055,1056,1057,1058,1059,1060,1061,1062,1063,1064,1065,1066,1067,1068,1069,1070,1071,1072,1073,1074,1075,1076,1077,1078,1079,1080,1081,1082,1083,1084,1087,1088,1089,1090,1091,1093,1094,1095,1096,1097,1098,1099,1100,1101,1102,1103,1104,1105,1106,1107,1108,1109,1110,1111,1112,1113,1114,1115,1116,1117,1118,1119,1120,1121,1122,1123,1124,1125,1126,1127,1128,1129,1130,1131,1132,1139,1140,1141,1143,1144,1150,1151,1152,1153,1154,1155,1156,1157,1165,1167,1168,1183,1184,1185,1186,1187,1188,1189,1190,1191,1192,1193,1197,1198,1199,1200,1201,1202,1203,1204,1205,1206,1207,1208,1209,1210,1211,1212,1213,1214,1215,1216,1217,1218,1219,1220,1221,1222,1223,1224,1225,1226,1227,1228,1229,1230,1231,1232,1233,1234,1235,1236,1237,1238,1239,1240,1241,1242,1243,1244,1245,1246,1247,1248,1249,1250,1251,1252,1253,1254,1255,1256,1257,1258,1259,1260,1261,1262,1263,1264,1265,1277,1278,1279,1280,1281,1282,1283,1284,1285,1286,1287,1288,1289,1290,1291,1292,1293,1294,1295,1296,1297,1298,1299,1300,1301,1302,1303,1304,1305,1306,1307,1308,1309,1310,1311,1312,1314,1315,1316,1321,1322,1323,1324,1332,1333,1334,1335,1336,1346,1347,1348,1362,1363,1364,1365,1366,1367,1369,1370,1371,1372,1373,1374,1375,1376,1377,1378,1379,1380,1381,1382,1383,1384,1385,1386,1387,1388,1389,1390,1391,1392,1393,1394,1395,1396,1397,1398,1399,1400,1401,1402,1403,1404,1405,1406,1407,1408,1409,1410,1411,1412,1413,1414,1415,1416,1417,1418,1419,1420,1421,1422,1423,1424,1425,1426,1427,1428,1429,1430,1431,1432,1433,1434,1435,1436,1437,1438,1439,1440,1441,1442,1443,1444,1445,1446,1456,1457,1458,1459,1460,1461,1462,1463,1464,1465,1466,1467,1468,1469,1470,1471,1472,1473,1474,1475,1476,1477,1478,1479,1480,1481,1482,1483,1484,1485,1486,1487,1488,1489,1490,1491,1498,1499,1500,1501,1514,1515,1516,1541,1542,1543,1544,1545,1546,1549,1550,1551,1552,1553,1554,1555,1556,1557,1558,1559,1560,1561,1562,1563,1564,1565,1566,1567,1568,1569,1570,1571,1572,1573,1574,1575,1576,1577,1578,1579,1580,1581,1582,1583,1584,1585,1586,1587,1588,1589,1590,1591,1592,1593,1594,1595,1596,1597,1598,1599,1600,1601,1602,1603,1604,1605,1606,1607,1608,1609,1610,1611,1612,1613,1614,1615,1616,1617,1618,1619,1621,1622,1623,1624,1625,1636,1637,1638,1639,1640,1641,1642,1644,1648,1649,1650,1651,1652,1653,1654,1655,1656,1657,1658,1659,1660,1661,1662,1663,1664,1665,1666,1667,1668,1669,1670,1671,1681,1682,1683,1684,1722,1723,1724,1725,1726,1727,1728,1731,1734,1735,1736,1737,1738,1739,1740,1741,1742,1743,1744,1745,1746,1747,1748,1749,1750,1751,1752,1753,1754,1755,1756,1757,1758,1759,1760,1761,1762,1763,1764,1765,1766,1767,1768,1769,1770,1771,1772,1773,1774,1775,1776,1777,1778,1779,1780,1781,1782,1783,1784,1785,1786,1787,1788,1789,1790,1791,1792,1793,1794,1795,1796,1800,1801,1822,1833,1834,1835,1836,1837,1838,1839,1840,1841,1842,1843,1844,1845,1846,1847,1848,1849,1850,1851,1852,1853,1862,1863,1864,1865,1866,1867,1868,1898,1906,1907,1908,1913,1914,1915,1916,1917,1918,1919,1920,1921,1922,1923,1924,1925,1926,1927,1928,1929,1930,1931,1932,1933,1934,1935,1936,1937,1938,1939,1940,1941,1942,1943,1944,1945,1946,1947,1948,1949,1950,1951,1952,1953,1954,1955,1956,1957,1958,1959,1960,1961,1962,1963,1964,1965,1966,1967,1968,1969,1970,1979,1980,1981,2001,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2043,2044,2045,2046,2047,2048,2049,2050,2079,2086,2087,2088,2092,2093,2094,2095,2096,2097,2098,2099,2100,2101,2102,2103,2104,2105,2106,2107,2108,2109,2110,2111,2112,2113,2114,2115,2116,2117,2118,2119,2120,2121,2122,2123,2124,2125,2126,2127,2128,2129,2130,2131,2132,2133,2134,2135,2136,2137,2138,2139,2140,2141,2142,2143,2144,2145,2146,2147,2148,2149,2159,2160,2161,2162,2196,2197,2198,2199,2200,2201,2202,2203,2204,2205,2206,2207,2208,2209,2210,2211,2212,2213,2214,2215,2216,2217,2218,2219,2220,2223,2224,2225,2226,2227,2228,2229,2230,2231,2232,2233,2258,2261,2267,2268,2270,2271,2272,2273,2274,2275,2276,2277,2278,2279,2280,2281,2282,2283,2284,2285,2286,2287,2288,2289,2290,2291,2292,2293,2294,2295,2296,2297,2298,2299,2300,2301,2302,2303,2304,2305,2306,2307,2308,2309,2310,2311,2312,2313,2314,2315,2316,2317,2318,2319,2320,2321,2322,2323,2324,2325,2326,2327,2328,2329,2330,2332,2340,2341,2342,2380,2381,2382,2383,2384,2385,2386,2387,2388,2389,2390,2391,2392,2393,2394,2395,2396,2397,2398,2399,2400,2401,2402,2404,2405,2406,2407,2408,2409,2410,2411,2412,2413,2414,2415,2439,2441,2442,2443,2446,2447,2448,2449,2450,2451,2452,2453,2454,2455,2456,2457,2458,2459,2460,2461,2462,2463,2464,2465,2466,2467,2468,2469,2470,2471,2472,2473,2474,2475,2476,2477,2478,2479,2480,2481,2482,2483,2484,2485,2486,2487,2488,2489,2490,2491,2492,2493,2494,2495,2496,2497,2498,2499,2500,2501,2502,2503,2504,2505,2506,2507,2508,2509,2510,2511,2512,2513,2514,2522,2560,2561,2562,2563,2564,2565,2566,2567,2568,2569,2570,2571,2572,2573,2574,2575,2576,2577,2578,2579,2580,2581,2582,2583,2584,2585,2586,2587,2588,2589,2590,2596,2625,2626,2627,2628,2629,2630,2631,2632,2633,2634,2635,2636,2637,2638,2639,2640,2641,2642,2643,2644,2645,2646,2647,2648,2649,2650,2651,2652,2653,2654,2655,2656,2657,2658,2659,2660,2661,2662,2663,2664,2665,2666,2667,2668,2669,2670,2671,2672,2673,2674,2675,2676,2677,2678,2679,2680,2681,2682,2683,2684,2685,2686,2687,2688,2689,2690,2691,2692,2693,2694,2696,2743,2744,2745,2746,2747,2748,2749,2750,2751,2752,2753,2754,2755,2756,2757,2758,2759,2760,2761,2762,2763,2764,2765,2766,2767,2768,2769,2770,2771,2772,2776,2777,2778,2803,2804,2805,2806,2807,2808,2809,2810,2811,2812,2813,2814,2815,2816,2817,2818,2819,2820,2821,2822,2823,2824,2825,2826,2827,2828,2829,2830,2831,2832,2833,2834,2835,2836,2837,2838,2839,2840,2841,2842,2843,2844,2845,2846,2847,2848,2849,2850,2851,2852,2853,2854,2855,2856,2857,2858,2859,2860,2861,2862,2863,2864,2865,2866,2867,2868,2869,2870,2871,2872,2873,2874,2876,2925,2926,2927,2928,2929,2930,2931,2932,2933,2934,2935,2936,2937,2938,2939,2940,2941,2942,2943,2944,2945,2946,2947,2948,2949,2950,2951,2952,2953,2954,2956,2986,2987,2988,2989,2990,2991,2992,2993,2994,2995,2996,2997,2998,2999,3000,3001,3003,3005,3006,3007,3008,3009,3010,3013,3014,3015,3016,3017,3018,3019,3020,3021,3022,3023,3024,3025,3026,3027,3028,3029,3030,3031,3032,3033,3034,3035,3036,3037,3038,3039,3040,3041,3042,3043,3044,3045,3046,3047,3048,3049,3050,3051,3052,3053,3054,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3116,3117,3118,3119,3120,3121,3122,3123,3124,3125,3126,3127,3128,3129,3130,3131,3132,3134,3167,3168,3169,3170,3171,3172,3173,3175,3176,3177,3178,3179,3180,3181,3187,3188,3189,3190,3193,3194,3195,3196,3197,3198,3199,3200,3201,3202,3203,3204,3205,3206,3207,3208,3209,3210,3211,3212,3213,3214,3215,3216,3217,3218,3219,3220,3221,3222,3223,3224,3225,3226,3227,3228,3229,3230,3231,3232,3233,3234,3238,3239,3286,3287,3288,3289,3290,3291,3292,3293,3294,3295,3296,3297,3298,3299,3300,3301,3302,3303,3304,3305,3306,3307,3308,3309,3310,3311,3312,3313,3344,3345,3346,3347,3348,3349,3354,3355,3358,3359,3360,3361,3365,3369,3370,3371,3372,3375,3376,3377,3378,3379,3380,3381,3382,3383,3384,3385,3386,3387,3388,3389,3390,3391,3392,3393,3394,3395,3396,3397,3398,3399,3400,3401,3402,3403,3404,3405,3406,3407,3408,3409,3410,3411,3412,3413,3418,3467,3468,3469,3470,3471,3472,3473,3474,3475,3476,3477,3478,3479,3480,3481,3482,3483,3484,3485,3486,3487,3488,3489,3490,3491,3525,3526,3527,3528,3529,3537,3539,3540,3541,3543,3544,3545,3546,3547,3548,3549,3550,3551,3552,3553,3556,3557,3558,3559,3560,3561,3562,3563,3564,3565,3566,3567,3568,3569,3570,3571,3572,3573,3574,3575,3576,3577,3578,3579,3580,3581,3582,3583,3584,3585,3586,3587,3588,3590,3591,3592,3599,3649,3650,3651,3652,3653,3654,3655,3656,3657,3658,3659,3660,3661,3662,3663,3664,3665,3666,3667,3668,3669,3670,3671,3706,3707,3708,3709,3717,3718,3721,3722,3724,3725,3726,3727,3728,3729,3730,3731,3732,3733,3734,3737,3738,3739,3740,3741,3742,3743,3744,3745,3746,3747,3748,3749,3750,3751,3752,3753,3754,3755,3756,3757,3758,3759,3760,3761,3762,3763,3764,3765,3766,3767,3768,3769,3773,3774,3780,3831,3832,3833,3834,3835,3836,3837,3838,3839,3840,3841,3842,3843,3844,3845,3846,3847,3848,3849,3850,3851,3852,3853,3892,3893,3894,3895,3896,3910,3911,3912,3913,3914,3915,3916,3917,3918,3919,3920,3921,3922,3923,3924,3925,3926,3927,3928,3929,3930,3931,3932,3933,3934,3935,3936,3937,3938,3939,3940,3941,3942,3943,3944,3945,3946,3947,3948,3949,3950,3951,3955,3959,3960,3961,4013,4014,4015,4016,4017,4018,4019,4020,4021,4022,4023,4024,4025,4026,4027,4028,4029,4030,4031,4032,4033,4069,4070,4071,4072,4073,4074,4075,4076,4077,4090,4091,4092,4093,4094,4095,4096,4097,4098,4099,4100,4101,4102,4103,4104,4105,4106,4107,4108,4109,4110,4111,4112,4113,4114,4115,4116,4117,4118,4119,4120,4121,4122,4123,4124,4125,4126,4127,4128,4129,4130,4131,4132,4138,4139,4140,4195,4196,4197,4198,4199,4200,4201,4202,4203,4204,4205,4206,4207,4208,4209,4210,4211,4212,4249,4250,4251,4252,4253,4254,4255,4256,4257,4258,4259,4260,4263,4264,4265,4271,4272,4273,4274,4275,4276,4277,4278,4279,4280,4281,4282,4283,4284,4285,4286,4287,4288,4289,4290,4291,4292,4293,4294,4295,4296,4297,4298,4299,4300,4301,4302,4303,4304,4305,4306,4307,4308,4309,4310,4311,4312,4313,4378,4379,4380,4381,4382,4383,4384,4385,4386,4387,4388,4389,4393,4430,4431,4432,4433,4434,4435,4436,4437,4438,4439,4440,4441,4442,4443,4444,4445,4446,4447,4448,4449,4450,4451,4452,4453,4454,4455,4456,4457,4458,4460,4461,4462,4463,4464,4465,4466,4467,4468,4469,4470,4471,4472,4473,4474,4475,4476,4477,4478,4479,4480,4481,4482,4483,4484,4485,4486,4487,4488,4489,4490,4491,4492,4493,4494,4558,4560,4561,4562,4563,4564,4565,4566,4574,4609,4610,4611,4612,4613,4614,4615,4616,4617,4618,4619,4620,4621,4622,4623,4624,4625,4626,4627,4628,4629,4630,4631,4632,4633,4634,4635,4636,4637,4638,4639,4641,4642,4643,4644,4645,4646,4647,4648,4649,4650,4651,4652,4653,4654,4655,4656,4657,4658,4659,4660,4661,4662,4663,4664,4665,4666,4667,4668,4669,4670,4671,4672,4673,4674,4675,4740,4742,4743,4744,4745,4746,4747,4789,4790,4791,4792,4793,4794,4795,4796,4797,4798,4799,4800,4801,4802,4803,4804,4805,4806,4807,4808,4809,4810,4811,4812,4813,4815,4816,4817,4818,4819,4820,4821,4825,4826,4827,4828,4829,4830,4831,4832,4833,4834,4835,4836,4837,4838,4839,4840,4841,4842,4843,4844,4845,4846,4847,4848,4849,4850,4851,4852,4853,4854,4855,4922,4924,4925,4926,4927,4928,4970,4971,4972,4973,4974,4975,4976,4977,4978,4979,4980,4981,4982,4983,4984,4985,4986,4987,4988,4989,4990,4991,4992,4993,4994,4997,4998,4999,5000,5001,5002,5003,5004,5005,5011,5012,5013,5014,5015,5016,5017,5018,5019,5020,5021,5022,5023,5024,5025,5026,5027,5028,5029,5030,5031,5032,5033,5034,5035,5106,5107,5108,5109,5116,5118,5119,5150,5151,5152,5153,5154,5155,5156,5157,5158,5159,5160,5161,5162,5163,5164,5165,5166,5167,5168,5169,5170,5171,5172,5173,5174,5175,5176,5178,5179,5180,5181,5182,5183,5184,5185,5186,5187,5193,5194,5195,5196,5197,5198,5199,5200,5201,5202,5203,5204,5205,5206,5207,5208,5209,5210,5211,5212,5213,5214,5287,5288,5289,5290,5294,5295,5301,5331,5332,5333,5334,5335,5336,5337,5338,5339,5340,5341,5342,5343,5344,5345,5346,5347,5348,5349,5350,5351,5352,5353,5354,5355,5356,5357,5360,5361,5362,5363,5364,5365,5366,5367,5376,5377,5378,5379,5380,5381,5382,5386,5387,5388,5389,5390,5391,5392,5394,5469,5470,5471,5472,5473,5474,5475,5487,5512,5513,5514,5515,5516,5517,5518,5519,5520,5521,5522,5523,5524,5525,5526,5527,5528,5529,5530,5531,5532,5533,5534,5535,5536,5537,5538,5539,5541,5542,5543,5544,5545,5546,5547,5548,5557,5558,5559,5560,5561,5568,5569,5570,5571,5572,5573,5581,5653,5654,5655,5656,5658,5693,5694,5695,5696,5697,5698,5699,5700,5701,5702,5703,5704,5705,5706,5707,5708,5709,5710,5711,5712,5713,5714,5715,5716,5717,5718,5719,5720,5723,5724,5725,5726,5727,5738,5739,5740,5741,5750,5751,5752,5753,5754,5755,5761,5837,5838,5839,5840,5874,5875,5876,5877,5878,5879,5880,5881,5882,5883,5884,5885,5886,5887,5888,5889,5890,5891,5892,5893,5894,5895,5896,5897,5898,5899,5900,5901,5902,5904,5905,5906,5920,5921,5922,5932,5933,5934,5935,5936,5943,6020,6021,6027,6028,6055,6056,6057,6058,6059,6060,6061,6062,6063,6064,6065,6066,6067,6068,6069,6070,6071,6072,6073,6074,6075,6076,6077,6078,6079,6080,6081,6082,6083,6084,6101,6102,6115,6116,6117,6202,6207,6208,6209,6210,6211,6212,6237,6238,6239,6240,6241,6242,6243,6244,6245,6246,6247,6248,6249,6250,6251,6252,6253,6254,6255,6256,6257,6258,6259,6260,6261,6262,6263,6264,6265,6266,6267,6268,6269,6283,6297,6386,6387,6388,6389,6390,6391,6392,6393,6394,6395,6419,6420,6421,6422,6423,6424,6425,6426,6427,6428,6429,6430,6431,6432,6433,6434,6435,6436,6437,6438,6439,6440,6441,6442,6443,6444,6445,6446,6447,6448,6449,6450,6465,6475,6487,6488,6568,6569,6570,6571,6572,6573,6574,6575,6576,6577,6601,6602,6603,6604,6605,6606,6609,6610,6611,6612,6613,6614,6615,6616,6617,6618,6619,6620,6621,6622,6623,6624,6625,6626,6627,6628,6629,6630,6657,6749,6750,6751,6752,6753,6754,6755,6756,6757,6758,6759,6760,6761,6792,6793,6794,6795,6796,6797,6798,6799,6800,6801,6802,6803,6804,6805,6806,6807,6808,6809,6810,6836,6838,6844,6845,6929,6930,6931,6932,6933,6934,6935,6936,6937,6938,6939,6940,6941,6942,6973,6974,6975,6976,6977,6978,6979,6980,6981,6982,6983,6984,6985,6986,6987,6988,6989,6990,7018,7020,7024,7025,7026,7109,7110,7111,7112,7113,7114,7115,7116,7117,7118,7119,7120,7121,7122,7123,7154,7155,7156,7157,7158,7159,7160,7161,7162,7163,7164,7165,7166,7167,7168,7169,7170,7199,7200,7204,7205,7206,7207,7209,7213,7290,7291,7292,7293,7294,7295,7296,7297,7298,7299,7300,7301,7302,7303,7304,7305,7306,7307,7335,7336,7337,7338,7339,7340,7341,7342,7343,7344,7345,7346,7347,7348,7349,7350,7381,7382,7386,7387,7388,7390,7397,7399,7471,7472,7473,7474,7475,7476,7477,7478,7479,7480,7481,7482,7483,7484,7485,7486,7487,7488,7489,7490,7491,7517,7518,7519,7520,7521,7522,7523,7524,7525,7526,7527,7528,7529,7530,7563,7571,7572,7579,7580,7581,7582,7583,7652,7653,7654,7655,7656,7657,7658,7659,7660,7661,7662,7663,7664,7665,7666,7667,7668,7669,7670,7671,7672,7673,7674,7699,7700,7701,7702,7703,7704,7705,7706,7707,7708,7709,7710,7711,7745,7762,7763,7764,7765,7767,7834,7835,7836,7837,7838,7839,7840,7841,7842,7843,7844,7845,7846,7847,7848,7849,7850,7851,7852,7853,7854,7855,7880,7881,7882,7883,7884,7885,7886,7887,7888,7889,7890,7891,7892,7929,7930,7942,7943,7944,7946,7947,8015,8016,8017,8018,8019,8020,8021,8022,8023,8024,8025,8026,8027,8028,8029,8030,8031,8032,8033,8034,8035,8036,8061,8062,8063,8064,8065,8066,8067,8068,8069,8070,8071,8072,8073,8114,8116,8128,8129,8197,8198,8199,8200,8201,8202,8203,8204,8205,8206,8207,8208,8209,8210,8211,8212,8213,8214,8215,8216,8242,8243,8244,8245,8246,8247,8248,8249,8250,8251,8252,8253,8254,8255,8302,8303,8306,8378,8379,8380,8381,8382,8383,8384,8385,8386,8387,8388,8389,8390,8391,8392,8393,8394,8395,8396,8423,8424,8425,8426,8427,8428,8429,8430,8431,8432,8433,8434,8435,8436,8440,8441,8481,8482,8483,8487,8560,8561,8562,8563,8564,8565,8566,8567,8568,8569,8570,8571,8572,8573,8574,8575,8576,8577,8603,8604,8605,8606,8607,8608,8609,8610,8611,8612,8613,8614,8615,8616,8617,8620,8621,8660,8661,8662,8663,8664,8665,8668,8669,8743,8744,8745,8746,8747,8748,8749,8750,8751,8752,8753,8754,8755,8756,8757,8758,8784,8785,8786,8787,8788,8789,8790,8791,8792,8793,8794,8795,8796,8801,8802,8840,8841,8842,8843,8844,8845,8846,8847,8848,8849,8850,8851,8867,8924,8925,8926,8927,8928,8929,8930,8931,8932,8933,8934,8935,8936,8937,8938,8966,8967,8968,8969,8970,8971,8972,8973,8974,8975,8976,8982,8983,9019,9020,9021,9022,9023,9024,9025,9026,9027,9028,9029,9030,9031,9032,9033,9105,9106,9107,9108,9109,9110,9111,9112,9113,9114,9115,9116,9117,9118,9119,9148,9149,9150,9151,9152,9153,9154,9155,9156,9157,9162,9163,9164,9198,9199,9200,9201,9202,9203,9204,9205,9206,9207,9208,9209,9210,9211,9212,9213,9214,9223,9286,9287,9288,9289,9290,9291,9292,9293,9294,9295,9296,9297,9329,9330,9331,9332,9333,9334,9335,9336,9337,9338,9343,9344,9378,9379,9380,9381,9382,9383,9384,9385,9386,9387,9388,9389,9390,9391,9392,9393,9394,9395,9396,9467,9468,9469,9470,9471,9472,9473,9474,9475,9476,9477,9510,9511,9512,9513,9514,9515,9516,9517,9518,9559,9560,9561,9562,9563,9564,9565,9566,9567,9568,9569,9570,9571,9572,9573,9574,9575,9576,9577,9578,9648,9649,9650,9651,9652,9653,9654,9655,9656,9657,9658,9691,9692,9693,9694,9695,9696,9697,9698,9699,9741,9742,9743,9744,9745,9746,9747,9748,9749,9750,9751,9752,9753,9754,9755,9756,9757,9758,9759,9829,9830,9831,9832,9833,9834,9835,9836,9837,9838,9873,9874,9875,9876,9877,9878,9879,9922,9923,9924,9925,9926,9927,9928,9929,9930,9931,9932,9933,9934,9935,9936,9937,9938,9939,9940,10010,10011,10012,10013,10014,10015,10016,10017,10018,10019,10055,10056,10057,10058,10059,10103,10104,10105,10106,10107,10108,10109,10112,10113,10114,10115,10116,10117,10118,10119,10120,10121,10191,10192,10193,10194,10195,10196,10197,10198,10199,10236,10237,10284,10285,10294,10295,10296,10297,10298,10299,10300,10301,10371,10372,10373,10374,10375,10376,10377,10378,10477,10478,10479,10480,10481,10482,10494,10552,10553,10554,10555,10556,10557,10558,10559,10659,10660,10661,10676,10677,10733,10734,10735,10736,10737,10857,10913,10914,10915,10916,10917,11023,11024,11036,11037,11095,11096,11097,11098,11216,11217,11275,11276,11277,11278,11396,11397,11456,11457,11458,11459,11460,11637,11638,11639,11818,11819,11820,12000,12001,12002";
+
+</script>
+<script>
+/* ---------- i18n ---------- */
+function t(k,l){return (I18N[l]&&I18N[l][k])!==undefined?I18N[l][k]:(I18N.es[k]||k);}
+function applyLang(l){
+  document.documentElement.lang=l;
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    el.textContent=t(el.getAttribute('data-i18n'),l);
+  });
+  document.querySelectorAll('.langs button').forEach(function(b){
+    b.classList.toggle('on',b.dataset.lang===l);
+  });
+  try{localStorage.setItem('ll_lang',l);}catch(e){}
+  renderSquads(l); renderSummary(l); renderBenefits(l); renderCountries(l);
+}
+document.querySelectorAll('.langs button').forEach(function(b){
+  b.addEventListener('click',function(){applyLang(b.dataset.lang);});
+});
+
+/* ---------- squads ---------- */
+function renderSquads(l){
+  var host=document.getElementById('squads'); if(!host) return; host.innerHTML='';
+  SQUADS.forEach(function(s){
+    var d=document.createElement('div'); d.className='squad';
+    var roles=s.roles.map(function(r){
+      return '<div class="role">'+
+        (r.onCamera?'<span class="oncam">'+t('int.oncam',l)+'</span><br>':'')+
+        '<div class="rt"><h4>'+r.title[l]+'</h4><span class="vac">'+r.n+' '+(r.n===1?t('int.vac1',l):t('int.vacn',l))+'</span></div>'+
+        '<p>'+r.desc[l]+'</p><ul>'+r.bullets[l].map(function(b){return '<li>'+b+'</li>';}).join('')+'</ul>'+
+        '<div class="stack">'+r.stack.map(function(c){return '<span class="chip">'+c+'</span>';}).join('')+'</div>'+
+        '<p class="cycle">'+r.cycle[l]+'</p></div>';
+    }).join('');
+    d.innerHTML='<div class="squad-head"><h3>'+s.name+'</h3>'+
+      '<span class="count">'+s.total+' '+t('int.vacn',l)+'</span>'+
+      '<span class="for">'+s.metric[l]+'</span></div><div class="roles">'+roles+'</div>';
+    host.appendChild(d);
+  });
+}
+function renderSummary(l){
+  var tb=document.getElementById('summaryrows'); if(!tb) return;
+  var total=0;
+  tb.innerHTML=SQUADS.map(function(s){
+    total+=s.total;
+    return '<tr><td>'+s.name+'</td><td>'+s.unit[l]+'</td><td>'+s.area[l]+'</td><td class="num">'+s.total+'</td></tr>';
+  }).join('')+'<tr class="total"><td colspan="3">'+t('int.thtotal',l)+'</td><td class="num">'+total+'</td></tr>';
+}
+function renderBenefits(l){
+  var host=document.getElementById('benslist'); if(!host) return;
+  host.innerHTML=BENEFITS.map(function(b){
+    return '<div class="ben"><h4>'+b.t[l]+'</h4><p>'+b.d[l]+'</p></div>';
+  }).join('');
+}
+
+/* ---------- world map ---------- */
+function renderMap(){
+  var svg=document.getElementById('worldmap'); if(!svg) return;
+  var COLS=181, U=1000/180;
+  var parts=[];
+  MAPDOTS.split(',').forEach(function(v){
+    var i=+v, r=Math.floor(i/COLS), c=i%COLS;
+    parts.push('<circle class="dot-land" cx="'+(c*U).toFixed(1)+'" cy="'+(r*U).toFixed(1)+'" r="1.5"/>');
+  });
+  COUNTRIES.forEach(function(k){
+    var x=(k.lng+180)/360*1000, y=(78-k.lat)/134*372.22;
+    parts.push('<circle class="pin-halo" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="9"><title>'+k.es+'</title></circle>');
+    parts.push('<circle class="pin" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="3.6"><title>'+k.es+'</title></circle>');
+  });
+  svg.innerHTML=parts.join('');
+}
+function renderCountries(l){
+  var host=document.getElementById('countrylist'); if(!host) return;
+  host.innerHTML=COUNTRIES.map(function(k){return '<span class="cchip">'+k[l]+'</span>';}).join('');
+}
+
+var saved='es';
+try{saved=localStorage.getItem('ll_lang')||'';}catch(e){saved='';}
+if(!saved){saved='es';}
+renderMap();
+applyLang(saved);
+</script>
+</body>
+</html>

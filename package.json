@@ -1,0 +1,12 @@
+{
+  "name": "limly-labs-web",
+  "private": true,
+  "type": "module",
+  "description": "Sitio de Limly Labs y receptor de postulaciones",
+  "scripts": {
+    "test": "node test/api.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^2.8.0"
+  }
+}

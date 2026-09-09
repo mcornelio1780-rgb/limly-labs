@@ -1,11 +1,14 @@
 # Limly Labs — Sitio web + Programa de Pasantías 2026
 
-Sitio estático, sin dependencias ni build. Trilingüe (ES / EN / PT).
+Sitio estático trilingüe (ES / EN / PT) con un almacén propio de postulaciones
+en Vercel Blob. Las páginas no necesitan build; solo las funciones de `api/`.
 
 ```
 index.html      Sitio del holding: nosotros, portafolio, mapa, pasantías, beneficios
 postular.html   Formulario de postulación con subida de CV y portafolio
 panel.html      Panel interno para leer las postulaciones (pide clave)
+api/            Funciones de Vercel: reciben, guardan y sirven las postulaciones
+test/           Pruebas de la API (npm test)
 favicon.png     Isotipo de la marca
 vercel.json     Configuración de Vercel
 backend/        Código para recibir las postulaciones (Google Apps Script)
@@ -41,92 +44,105 @@ Domains → añade `limlylabs.com` y apunta el DNS a Vercel.
 Con la configuración de `vercel.json` las URLs quedan limpias:
 `limlylabs.com` y `limlylabs.com/postular`.
 
-## 3. Conectar el formulario
+## 3. Dónde se guardan las postulaciones
 
-Mientras no configures un endpoint, las postulaciones se guardan solo en el
-navegador de quien postula. **Esto hay que hacerlo antes de publicar la
-convocatoria.**
+Hay **tres destinos**, por orden. Si uno cae, los otros siguen:
 
-El receptor es un Google Apps Script: guarda cada postulación como una fila en
-una Google Sheet y sube el CV y el portafolio a una carpeta de Drive. Es gratis
-y no necesita servidor.
+1. **Vercel Blob** — el almacén principal, tuyo, en tu propia cuenta. Es lo que
+   decide si una postulación se dio por buena.
+2. **Correo** — un aviso por cada postulación (opcional).
+3. **Google Sheet** — espejo vía Apps Script (opcional). También es el plan B
+   del formulario si la API no responde.
 
-1. Crea una hoja nueva en <https://sheets.new> y nómbrala
-   "Postulaciones Limly Labs 2026".
-2. En esa hoja: **Extensiones → Apps Script**. Borra lo que haya y pega todo
-   `backend/google-apps-script.gs`. Guarda.
-3. En el selector de función elige **`instalar`** y pulsa **Ejecutar**. Autoriza
-   los permisos (la pantalla de "app no verificada" es normal: la app es tuya —
-   Configuración avanzada → Ir a… → Permitir). Al terminar, el panel de
-   ejecución imprime los enlaces a tu hoja y a tu carpeta de Drive: **guárdalos,
-   son tu panel de la convocatoria.**
-4. **Implementar → Nueva implementación → Aplicación web**, con
-   *Ejecutar como:* **Yo** y *Quién tiene acceso:* **Cualquier usuario**.
-   Copia la URL que termina en `/exec`.
-5. Pega esa URL en el navegador. Si responde
-   `{"ok":true,"servicio":"limly-labs-postulaciones",...}`, está viva.
-6. Abre `postular.html` y pega la URL en esta línea (cerca del inicio del bloque
-   `<script>`):
+Además, el navegador de quien postula guarda una copia local de último recurso,
+recuperable con `postular.html?admin=1` en ese mismo equipo.
 
-   ```js
-   var CONFIG = { endpoint: "https://script.google.com/macros/s/.../exec", maxCvMB: 5, maxPfMB: 10 };
-   ```
+### 3.1 Crear el almacén (obligatorio, 2 min)
 
-7. Commit y push: Vercel redespliega solo. Envía una postulación de prueba
-   desde el sitio y comprueba que aparece la fila.
+1. Vercel → tu proyecto → pestaña **Storage** → **Create Database** → **Blob**.
+2. Nómbralo `postulaciones` y conéctalo al proyecto.
 
-Si cambias el código del script después, usa **Implementar → Administrar
-implementaciones → editar (lápiz) → Versión: Nueva versión**. Si en cambio
-creas una implementación *nueva*, la URL cambia y el formulario deja de enviar.
+Vercel inyecta `BLOB_READ_WRITE_TOKEN` solo. No tienes que copiar nada.
 
-Opcional: pon tu correo en `NOTIFICAR_A` (dentro del `.gs`) para recibir un
-aviso por cada postulación.
+### 3.2 Poner la clave del panel (obligatorio)
 
-### Dónde ves los datos
+Vercel → Settings → **Environment Variables** → añade:
 
-No hay panel propio: **el panel es tu Google Sheet.**
+| Variable | Valor |
+|---|---|
+| `PANEL_PASSWORD` | una contraseña larga que te inventes |
 
-- **Los datos:** una fila por postulante con todos los campos, en la hoja que
-  creaste en el paso 1. Está en <https://sheets.google.com> con el nombre
-  "Postulaciones Limly Labs 2026".
-- **Los archivos:** en tu carpeta de Drive, <https://drive.google.com>, carpeta
-  "Postulaciones Limly Labs 2026". En la hoja, las dos últimas columnas traen
-  el enlace directo al CV y al portafolio de cada persona.
+Es la que te pedirá <https://limly-labs.vercel.app/panel>. Sin ella el panel
+devuelve 503 y no muestra nada.
 
-¿Perdiste las direcciones exactas? En el editor de Apps Script elige la función
-**`enlaces`** y pulsa Ejecutar: las vuelve a imprimir en el panel de ejecución,
-junto con la clave del panel y el número de postulaciones recibidas.
+### 3.3 Aviso por correo (opcional, recomendado)
 
-### El panel del sitio
+1. Crea una cuenta en <https://resend.com> y genera una API key.
+2. Añade en Vercel:
 
-<https://limly-labs.vercel.app/panel> lee las postulaciones en vivo y las
-muestra en una lista buscable, con descarga a CSV y enlace al CV de cada
-persona. Pide la clave que imprime `enlaces`; la clave queda guardada en tu
-navegador, no en el sitio.
+| Variable | Valor |
+|---|---|
+| `RESEND_API_KEY` | la key de Resend |
+| `NOTIFY_EMAIL` | tu correo |
+| `EMAIL_FROM` | opcional; por defecto `Limly Labs <onboarding@resend.dev>` |
 
-La página es pública pero **sin la clave no muestra nada, y el sitio de Vercel
-nunca llega a ver los datos**: es HTML estático, la petición sale del navegador
-directa a Google Apps Script. Los datos siguen viviendo solo en tu Google Sheet.
-No pongas la clave en el sitio ni la compartas fuera del equipo: detrás hay
-nombres, correos, teléfonos y CVs de gente real.
+Con el remitente por defecto, Resend **solo entrega a la dirección de tu propia
+cuenta**. Para escribir a otras hay que verificar un dominio en Resend.
 
-### Si algo falla
+### 3.4 Espejo a Google Sheet (opcional)
 
-- **El formulario muestra error al enviar** → casi siempre la implementación
-  quedó como "Solo yo". Cámbiala a *Cualquier usuario* y vuelve a implementar.
-- **No aparece la fila** → en el editor de Apps Script, panel **Ejecuciones**:
-  ahí sale el error exacto de cada intento.
-- **Los enlaces de CV no abren para tu equipo** → tu cuenta de Workspace
-  prohíbe compartir con "cualquiera con el enlace". Los archivos están
-  guardados igual; compártelos desde la carpeta.
+| Variable | Valor |
+|---|---|
+| `APPS_SCRIPT_URL` | tu URL `/exec` del Apps Script |
 
-### Alternativa
+Instalación del script: pega `backend/google-apps-script.gs` en la hoja
+(Extensiones → Apps Script), ejecuta **`instalar`**, luego **`enlaces`**, y
+publica con **Implementar → Aplicación web**, *Ejecutar como:* Yo,
+*Quién tiene acceso:* **Cualquier usuario**.
 
-Si prefieres n8n, Make o Zapier, crea un webhook y pega su URL en el mismo
-campo `endpoint`. Recibe el mismo JSON: todos los campos en texto plano y los
-archivos en `cv_base64` y `portafolio_base64`.
+Para que el panel pueda usarlo como plan B, pon la misma cadena en
+`PANEL_PASSWORD` y en la propiedad `CLAVE_PANEL` del script (editor → engranaje
+**Configuración del proyecto** → Propiedades de la secuencia de comandos).
 
----
+> **Después de tocar cualquier variable, hay que redesplegar** para que las
+> funciones la vean: Vercel → Deployments → ⋯ → Redeploy.
+
+### 3.5 Comprobarlo
+
+1. Postula de prueba en <https://limly-labs.vercel.app/postular>.
+2. Ábrela en <https://limly-labs.vercel.app/panel>. Arriba dice de qué fuente
+   está leyendo.
+3. Descarga el CV desde la ficha y comprueba que se abre.
+
+Si el formulario falla, ahora dice el motivo en pantalla en vez de darlo por
+bueno.
+
+## Privacidad de los datos
+
+Los blobs se guardan con `access: 'private'`: no son accesibles por URL, ni
+siquiera conociéndola. Solo se leen desde las funciones de `api/`, que usan el
+token del almacén y exigen `PANEL_PASSWORD`.
+
+Los archivos que suba el Apps Script a Drive, en cambio, quedan compartidos
+"con cualquiera que tenga el enlace" — es la única forma en que Apps Script
+puede enlazarlos desde la hoja. Si eso te preocupa, deja `APPS_SCRIPT_URL` sin
+poner y usa solo el almacén de Vercel.
+
+`PANEL_PASSWORD` abre todas las postulaciones: nombres, correos, teléfonos y
+CVs de gente real. No la pongas en el sitio ni la compartas fuera del equipo.
+
+## Límites
+
+- **4 MB por archivo.** Es el techo de Vercel por petición (4,5 MB) con margen.
+  Los portafolios grandes van por el campo de enlace.
+- **2000 postulaciones** en el panel. Más allá habría que paginarlo.
+
+## Desarrollo
+
+```bash
+npm install
+npm test        # pruebas de la API: autenticación, validación y utilidades
+```
 
 ## Editar contenido
 

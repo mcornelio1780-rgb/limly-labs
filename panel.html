@@ -92,6 +92,7 @@ dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
   <div>
     <h1>Postulaciones <span>·</span> Limly Labs 2026</h1>
     <p class="sub" id="sub">Panel interno</p>
+    <p class="sub" id="fuente"></p>
   </div>
   <button class="ghost" id="salir" hidden>Cerrar sesión</button>
 </header>
@@ -99,16 +100,12 @@ dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
 <!-- Puerta ─────────────────────────────────────────────────────────── -->
 <section class="gate" id="gate">
   <h2>Clave del panel</h2>
-  <p>Esta página no muestra nada hasta que introduzcas la clave. La imprime la
-     función <code>enlaces</code> del Apps Script, en el panel de ejecución.</p>
+  <p>Esta página no muestra nada hasta que introduzcas la clave: la que pusiste
+     en <code>PANEL_PASSWORD</code>, en las variables de entorno de Vercel.</p>
   <form id="gateform">
     <div class="field">
       <label for="clave">Clave</label>
       <input type="password" id="clave" autocomplete="off" spellcheck="false" required>
-    </div>
-    <div class="field">
-      <label for="endpoint">Endpoint (solo si cambiaste la implementación)</label>
-      <input type="text" id="endpoint" spellcheck="false">
     </div>
     <button type="submit">Entrar</button>
   </form>
@@ -129,82 +126,166 @@ dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
 
 </div>
 <script>
-var ENDPOINT_POR_DEFECTO = "https://script.google.com/macros/s/AKfycbx2NAxteROHoYJ_l9HH_w3QmLiWLflwlX4riidzoyMee-ydf36agk3bIl1sbh5nx2tf4Q/exec";
+/* Fuente principal: el almacén propio en Vercel. Si no responde, se intenta
+   Apps Script con la misma clave, para que una caída de Google no deje el
+   panel a oscuras. */
+var API = "/api";
+var APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbx2NAxteROHoYJ_l9HH_w3QmLiWLflwlX4riidzoyMee-ydf36agk3bIl1sbh5nx2tf4Q/exec";
+
+/* Orden y etiqueta de cada campo. Vale para pintar, para el CSV y para
+   traducir las columnas que llegan de Apps Script. */
+var CAMPOS = [
+  {k:'recibido_en',  l:'Fecha'},
+  {k:'idioma',       l:'Idioma'},
+  {k:'nombres',      l:'Nombres'},
+  {k:'apellidos',    l:'Apellidos'},
+  {k:'email',        l:'Correo'},
+  {k:'telefono',     l:'Teléfono'},
+  {k:'pais',         l:'País'},
+  {k:'ciudad',       l:'Ciudad'},
+  {k:'universidad',  l:'Universidad'},
+  {k:'carrera',      l:'Carrera'},
+  {k:'ciclo',        l:'Ciclo'},
+  {k:'horas',        l:'Horas/semana'},
+  {k:'squad',        l:'Squad'},
+  {k:'perfiles',     l:'Perfiles'},
+  {k:'camara',       l:'Frente a cámara'},
+  {k:'enlace',       l:'Enlace portafolio'},
+  {k:'motivacion',   l:'Motivación'},
+  {k:'fuente',       l:'Cómo se enteró'},
+  {k:'consent',      l:'Consentimiento'}
+];
 
 var $ = function(id){ return document.getElementById(id); };
-var estado = { columnas:[], filas:[], hoja:"", carpeta:"" };
+var estado = { lista:[], fuente:'', hoja:'', carpeta:'' };
+var CLAVE = '';
 
-/* La clave vive solo en este navegador. Nunca viaja al sitio de Vercel:
-   el sitio es estático, la petición va directa a Google Apps Script. */
 function guardado(k,d){ try{ return localStorage.getItem(k)||d; }catch(e){ return d; } }
 function guardar(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
-
-function endpoint(){ return guardado('ll_endpoint', ENDPOINT_POR_DEFECTO); }
-
-function cargar(clave){
-  var url = endpoint()+'?panel='+encodeURIComponent(clave)+'&datos=1&t='+Date.now();
-  return fetch(url).then(function(r){
-    if(!r.ok) throw new Error('El endpoint respondió '+r.status+'.');
-    return r.json();
-  }).then(function(d){
-    if(!d.ok) throw new Error(d.error||'El Apps Script devolvió un error.');
-    /* Sin "filas" la clave no coincidió: el script devuelve el estado pelado. */
-    if(!d.filas) throw new Error('Clave incorrecta, o el Apps Script todavía no tiene una clave (ejecuta instalar y luego enlaces).');
-    estado = { columnas:d.columnas||[], filas:d.filas, hoja:d.hoja||"", carpeta:d.carpeta||"" };
-    return estado;
-  });
-}
-
-/* ── Render ─────────────────────────────────────────────────────────── */
-
-var C = {};  /* nombre de columna → índice */
-function indexar(cols){ C={}; cols.forEach(function(n,i){ C[n]=i; }); }
-function campo(fila,nombre){ return C[nombre]===undefined ? "" : (fila[C[nombre]]||""); }
-
-function esUrl(v){ return /^https?:\/\//i.test(v); }
-
-function pintar(){
-  indexar(estado.columnas);
-  var q = $('q').value.trim().toLowerCase();
-  var filas = estado.filas.filter(function(f){
-    return !q || f.join(' ').toLowerCase().indexOf(q) > -1;
-  });
-
-  $('count').innerHTML = q
-    ? '<b>'+filas.length+'</b> de '+estado.filas.length
-    : '<b>'+estado.filas.length+'</b> postulación'+(estado.filas.length===1?'':'es');
-
-  if(!filas.length){
-    $('lista').innerHTML = '<p class="empty">'+
-      (estado.filas.length ? 'Ninguna coincide con la búsqueda.'
-                           : 'Todavía no hay postulaciones.')+'</p>';
-    return;
-  }
-
-  $('lista').innerHTML = filas.map(function(f){
-    var nombre = (campo(f,'Nombres')+' '+campo(f,'Apellidos')).trim() || 'Sin nombre';
-    var meta = [campo(f,'Universidad'), campo(f,'Carrera'), campo(f,'Squad')]
-                 .filter(Boolean).join(' · ');
-    var detalle = estado.columnas.map(function(col,i){
-      var v = f[i];
-      if(!v) return '';
-      return '<dt>'+txt(col)+'</dt><dd>'+(esUrl(v)
-        ? '<a href="'+txt(v)+'" target="_blank" rel="noopener">'+txt(v)+'</a>'
-        : txt(v))+'</dd>';
-    }).join('');
-
-    return '<details class="row"><summary>'+
-      '<span class="who">'+txt(nombre)+' <em>'+txt(campo(f,'Correo'))+'</em></span>'+
-      '<span class="when">'+txt(campo(f,'Fecha'))+'</span>'+
-      '<span class="meta">'+txt(meta)+'</span>'+
-      '</summary><div class="detail"><dl>'+detalle+'</dl></div></details>';
-  }).join('');
-}
 
 function txt(s){
   return String(s==null?'':s).replace(/[&<>"']/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
   });
+}
+function esUrl(v){ return /^https?:\/\//i.test(String(v)); }
+
+/* ── Carga ──────────────────────────────────────────────────────────── */
+
+function desdeApi(clave){
+  return fetch(API+'/postulaciones?t='+Date.now(),{headers:{'Authorization':'Bearer '+clave}})
+    .then(function(r){
+      return r.json().catch(function(){ throw new Error('el almacén respondió '+r.status); });
+    })
+    .then(function(d){
+      if(!d.ok) throw new Error(d.error||'el almacén devolvió un error');
+      return { lista:d.postulaciones||[], fuente:'almacén de Vercel', hoja:'', carpeta:'' };
+    });
+}
+
+/* Apps Script devuelve filas paralelas a una cabecera; las pasamos a objetos
+   con las mismas claves que usa el almacén, para pintar todo por un solo sitio. */
+function desdeAppsScript(clave){
+  var url = APPS_SCRIPT+'?panel='+encodeURIComponent(clave)+'&datos=1&t='+Date.now();
+  return fetch(url).then(function(r){ return r.json(); }).then(function(d){
+    if(!d.ok) throw new Error(d.error||'Apps Script devolvió un error');
+    if(!d.filas) throw new Error('clave incorrecta para Apps Script');
+    var porEtiqueta = {};
+    CAMPOS.forEach(function(c){ porEtiqueta[c.l]=c.k; });
+    var lista = d.filas.map(function(f){
+      var o = {};
+      (d.columnas||[]).forEach(function(col,i){
+        var k = porEtiqueta[col];
+        if(k) o[k]=f[i];
+        else if(col==='CV' && f[i]) o.cv={url:f[i],nombre:'CV'};
+        else if(col==='Portafolio' && f[i]) o.portafolio={url:f[i],nombre:'Portafolio'};
+      });
+      return o;
+    });
+    return { lista:lista, fuente:'Google Sheet (plan B)', hoja:d.hoja||'', carpeta:d.carpeta||'' };
+  });
+}
+
+function cargar(clave){
+  return desdeApi(clave).catch(function(err){
+    console.warn('El almacén no respondió:',err.message);
+    return desdeAppsScript(clave).catch(function(err2){
+      throw new Error(err.message+' · Plan B: '+err2.message);
+    });
+  });
+}
+
+/* ── Render ─────────────────────────────────────────────────────────── */
+
+function pintar(){
+  var q = $('q').value.trim().toLowerCase();
+  var lista = estado.lista.filter(function(p){
+    if(!q) return true;
+    return CAMPOS.map(function(c){ return p[c.k]||''; }).join(' ').toLowerCase().indexOf(q)>-1;
+  });
+
+  $('count').innerHTML = q
+    ? '<b>'+lista.length+'</b> de '+estado.lista.length
+    : '<b>'+estado.lista.length+'</b> postulación'+(estado.lista.length===1?'':'es');
+
+  if(!lista.length){
+    $('lista').innerHTML = '<p class="empty">'+
+      (estado.lista.length ? 'Ninguna coincide con la búsqueda.'
+                           : 'Todavía no hay postulaciones.')+'</p>';
+    return;
+  }
+
+  $('lista').innerHTML = lista.map(function(p,i){
+    var nombre = ((p.nombres||'')+' '+(p.apellidos||'')).trim() || 'Sin nombre';
+    var meta = [p.universidad,p.carrera,p.squad].filter(Boolean).join(' · ');
+    var fecha = (p.recibido_en||'').replace('T',' ').slice(0,16);
+
+    var detalle = CAMPOS.map(function(c){
+      var v = p[c.k];
+      if(v===undefined||v===null||v==='') return '';
+      return '<dt>'+txt(c.l)+'</dt><dd>'+(esUrl(v)
+        ? '<a href="'+txt(v)+'" target="_blank" rel="noopener">'+txt(v)+'</a>'
+        : txt(v))+'</dd>';
+    }).join('');
+
+    detalle += adjunto('CV', p.cv, i, 'cv');
+    detalle += adjunto('Portafolio', p.portafolio, i, 'pf');
+
+    return '<details class="row"><summary>'+
+      '<span class="who">'+txt(nombre)+' <em>'+txt(p.email||'')+'</em></span>'+
+      '<span class="when">'+txt(fecha)+'</span>'+
+      '<span class="meta">'+txt(meta)+'</span>'+
+      '</summary><div class="detail"><dl>'+detalle+'</dl></div></details>';
+  }).join('');
+
+  /* Los adjuntos del almacén son privados: se piden con la clave, no con un
+     enlace suelto, así que hay que engancharlos después de pintar. */
+  Array.prototype.forEach.call($('lista').querySelectorAll('[data-ruta]'),function(b){
+    b.addEventListener('click',function(){ bajarArchivo(b.dataset.ruta,b.dataset.nombre,b); });
+  });
+}
+
+function adjunto(etiqueta,a,i,slug){
+  if(!a) return '';
+  if(a.url) return '<dt>'+etiqueta+'</dt><dd><a href="'+txt(a.url)+'" target="_blank" rel="noopener">'+txt(a.nombre||etiqueta)+'</a></dd>';
+  if(a.ruta) return '<dt>'+etiqueta+'</dt><dd><button class="ghost" type="button" '+
+    'data-ruta="'+txt(a.ruta)+'" data-nombre="'+txt(a.nombre||etiqueta)+'">Descargar '+txt(a.nombre||etiqueta)+'</button></dd>';
+  return '';
+}
+
+function bajarArchivo(ruta,nombre,boton){
+  var antes = boton.textContent;
+  boton.disabled = true; boton.textContent = 'Bajando…';
+  fetch(API+'/archivo?ruta='+encodeURIComponent(ruta),{headers:{'Authorization':'Bearer '+CLAVE}})
+    .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.blob(); })
+    .then(function(b){
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(b); a.download = nombre || 'archivo';
+      a.click();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 30000);
+    })
+    .catch(function(err){ alert('No se pudo bajar el archivo: '+err.message); })
+    .then(function(){ boton.disabled=false; boton.textContent=antes; });
 }
 
 function pintarEnlaces(){
@@ -212,14 +293,19 @@ function pintarEnlaces(){
   if(estado.hoja)    l.push('<a href="'+txt(estado.hoja)+'" target="_blank" rel="noopener">Abrir la Google Sheet</a>');
   if(estado.carpeta) l.push('<a href="'+txt(estado.carpeta)+'" target="_blank" rel="noopener">Abrir la carpeta de CVs</a>');
   $('links').innerHTML = l.join('');
+  $('fuente').textContent = estado.fuente ? 'Leyendo de: '+estado.fuente : '';
 }
 
 /* ── CSV ────────────────────────────────────────────────────────────── */
 
 function csv(){
   var esc = function(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; };
-  var cuerpo = [estado.columnas].concat(estado.filas)
-    .map(function(f){ return f.map(esc).join(','); }).join('\r\n');
+  var cabecera = CAMPOS.map(function(c){ return c.l; }).concat(['CV','Portafolio']);
+  var filas = estado.lista.map(function(p){
+    return CAMPOS.map(function(c){ return p[c.k]; })
+      .concat([ p.cv&&(p.cv.url||p.cv.ruta)||'', p.portafolio&&(p.portafolio.url||p.portafolio.ruta)||'' ]);
+  });
+  var cuerpo = [cabecera].concat(filas).map(function(f){ return f.map(esc).join(','); }).join('\r\n');
   /* El BOM hace que Excel abra bien las tildes y la ñ. */
   var blob = new Blob(["\ufeff"+cuerpo], {type:'text/csv;charset=utf-8'});
   var a = document.createElement('a');
@@ -233,13 +319,12 @@ function csv(){
 
 function abrir(clave){
   $('gatemsg').innerHTML = '<div class="msg info">Cargando…</div>';
-  return cargar(clave).then(function(){
-    guardar('ll_panel_key', clave);
-    $('gate').hidden = true;
-    $('panel').hidden = false;
-    $('salir').hidden = false;
+  return cargar(clave).then(function(r){
+    CLAVE = clave; guardar('ll_panel_key', clave);
+    estado = r;
+    $('gate').hidden = true; $('panel').hidden = false; $('salir').hidden = false;
     $('gatemsg').innerHTML = '';
-    $('sub').textContent = 'Panel interno · datos en vivo desde tu Google Sheet';
+    $('sub').textContent = 'Panel interno · datos en vivo';
     pintar(); pintarEnlaces();
   }).catch(function(err){
     $('gatemsg').innerHTML = '<div class="msg err">'+txt(err.message)+'</div>';
@@ -247,12 +332,8 @@ function abrir(clave){
   });
 }
 
-$('endpoint').value = endpoint();
-
 $('gateform').addEventListener('submit', function(ev){
   ev.preventDefault();
-  var ep = $('endpoint').value.trim();
-  if(ep) guardar('ll_endpoint', ep);
   abrir($('clave').value.trim()).catch(function(){});
 });
 
@@ -260,13 +341,14 @@ $('q').addEventListener('input', pintar);
 $('csv').addEventListener('click', csv);
 $('recargar').addEventListener('click', function(){
   var b = $('recargar'); b.disabled = true; b.textContent = 'Cargando…';
-  cargar(guardado('ll_panel_key','')).then(pintar).catch(function(err){
-    $('lista').insertAdjacentHTML('beforebegin','<div class="msg err">'+txt(err.message)+'</div>');
-  }).then(function(){ b.disabled = false; b.textContent = 'Recargar'; });
+  cargar(CLAVE).then(function(r){ estado = r; pintar(); pintarEnlaces(); })
+    .catch(function(err){
+      $('lista').insertAdjacentHTML('beforebegin','<div class="msg err">'+txt(err.message)+'</div>');
+    })
+    .then(function(){ b.disabled = false; b.textContent = 'Recargar'; });
 });
 $('salir').addEventListener('click', function(){
-  guardar('ll_panel_key','');
-  location.reload();
+  guardar('ll_panel_key',''); location.reload();
 });
 
 /* Si ya entraste antes en este navegador, no vuelve a pedir la clave. */

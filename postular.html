@@ -793,7 +793,13 @@ var MAPDOTS = "34,35,40,48,49,50,51,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68
    navegador y puedes exportarlas abriendo esta página
    con ?admin=1 al final de la URL.
    ======================================================= */
-var CONFIG = { endpoint: "https://script.google.com/macros/s/AKfycbx2NAxteROHoYJ_l9HH_w3QmLiWLflwlX4riidzoyMee-ydf36agk3bIl1sbh5nx2tf4Q/exec", maxCvMB: 5, maxPfMB: 10 };
+/* api: almacén propio en Vercel, es quien manda. endpoint: Apps Script, plan B.
+   Los 4 MB son el techo de Vercel por petición (4,5 MB), con margen. */
+var CONFIG = {
+  api: "/api",
+  endpoint: "https://script.google.com/macros/s/AKfycbx2NAxteROHoYJ_l9HH_w3QmLiWLflwlX4riidzoyMee-ydf36agk3bIl1sbh5nx2tf4Q/exec",
+  maxCvMB: 4, maxPfMB: 4
+};
 
 var FORM_I18N = {
 es:{
@@ -809,8 +815,8 @@ es:{
 "fm.squadhint":"Elige el squad que más te interesa. Si te da igual, marca la última opción.",
 "fm.role":"Perfil dentro del squad",
 "fm.oncam":"¿Estarías dispuesto a grabar contenido frente a cámara?",
-"fm.sec4":"Tu trabajo","fm.cv":"Sube tu CV","fm.cvhint":"PDF o Word, máximo 5 MB.",
-"fm.portfolio":"Sube tu portafolio","fm.pfhint":"Opcional. PDF, ZIP, imagen o video, máximo 10 MB.",
+"fm.sec4":"Tu trabajo","fm.cv":"Sube tu CV","fm.cvhint":"PDF o Word, máximo 4 MB.",
+"fm.portfolio":"Sube tu portafolio","fm.pfhint":"Opcional. PDF, ZIP, imagen o video, máximo 4 MB. Si pesa más, deja el enlace abajo.",
 "fm.link":"Enlace a tu portafolio, perfil o repositorio","fm.linkhint":"Behance, Drive, TikTok, Instagram, GitHub, LinkedIn: lo que muestre lo que haces.",
 "fm.why":"¿Por qué quieres entrar? ","fm.whyhint":"Opcional, máximo 600 caracteres. Sin cartas de presentación.",
 "fm.source":"¿Cómo te enteraste de la convocatoria?",
@@ -842,8 +848,8 @@ en:{
 "fm.squadhint":"Pick the squad you're most interested in. If you don't mind, choose the last option.",
 "fm.role":"Role within the squad",
 "fm.oncam":"Would you be willing to record content on camera?",
-"fm.sec4":"Your work","fm.cv":"Upload your CV","fm.cvhint":"PDF or Word, up to 5 MB.",
-"fm.portfolio":"Upload your portfolio","fm.pfhint":"Optional. PDF, ZIP, image or video, up to 10 MB.",
+"fm.sec4":"Your work","fm.cv":"Upload your CV","fm.cvhint":"PDF or Word, up to 4 MB.",
+"fm.portfolio":"Upload your portfolio","fm.pfhint":"Optional. PDF, ZIP, image or video, up to 4 MB. If it is larger, leave the link below.",
 "fm.link":"Link to your portfolio, profile or repository","fm.linkhint":"Behance, Drive, TikTok, Instagram, GitHub, LinkedIn: whatever shows what you do.",
 "fm.why":"Why do you want to join?","fm.whyhint":"Optional, up to 600 characters. No cover letters.",
 "fm.source":"How did you hear about this?",
@@ -875,8 +881,8 @@ pt:{
 "fm.squadhint":"Escolhe o squad que mais te interessa. Se for indiferente, marca a última opção.",
 "fm.role":"Função dentro do squad",
 "fm.oncam":"Estarias disponível para gravar conteúdo frente à câmara?",
-"fm.sec4":"O teu trabalho","fm.cv":"Carrega o teu CV","fm.cvhint":"PDF ou Word, até 5 MB.",
-"fm.portfolio":"Carrega o teu portfólio","fm.pfhint":"Opcional. PDF, ZIP, imagem ou vídeo, até 10 MB.",
+"fm.sec4":"O teu trabalho","fm.cv":"Carrega o teu CV","fm.cvhint":"PDF ou Word, até 4 MB.",
+"fm.portfolio":"Carrega o teu portfólio","fm.pfhint":"Opcional. PDF, ZIP, imagem ou vídeo, até 4 MB. Se for maior, deixa o link abaixo.",
 "fm.link":"Link para o teu portfólio, perfil ou repositório","fm.linkhint":"Behance, Drive, TikTok, Instagram, GitHub, LinkedIn: o que mostrar o que fazes.",
 "fm.why":"Porque queres entrar?","fm.whyhint":"Opcional, até 600 caracteres. Sem cartas de apresentação.",
 "fm.source":"Como soubeste da convocatória?",
@@ -947,6 +953,64 @@ function toBase64(file){
 }
 function show(kind,text){ var m=document.getElementById('msg'); m.className='msg '+kind; m.textContent=text; }
 
+/* ── Camino principal: el almacén propio en Vercel ────────────────────
+   Los archivos van crudos, uno por petición: en base64 ocuparían un tercio
+   más y no cabrían en el límite de Vercel. Solo cuando ambos están arriba se
+   registra la postulación, para que no quede una ficha apuntando a un CV que
+   no llegó a subirse. */
+function subirArchivo(file,tipo){
+  var url=CONFIG.api+'/archivo?tipo='+tipo+'&nombre='+encodeURIComponent(file.name);
+  return fetch(url,{method:'POST',headers:{'Content-Type':file.type||'application/octet-stream'},body:file})
+    .then(function(r){ return r.json().catch(function(){ throw new Error('respuesta ilegible'); }); })
+    .then(function(res){
+      if(!res.ok) throw new Error(res.error||'no se pudo subir '+tipo);
+      return { ruta:res.ruta, nombre:file.name, tipo:file.type, bytes:res.bytes };
+    });
+}
+
+function enviarAlAlmacen(data,cv,pf){
+  if(!CONFIG.api) return Promise.reject(new Error('sin almacén configurado'));
+  return Promise.all([
+    cv?subirArchivo(cv,'cv'):null,
+    pf?subirArchivo(pf,'portafolio'):null
+  ]).then(function(subidos){
+    var registro={};
+    for(var k in data){ if(Object.prototype.hasOwnProperty.call(data,k)) registro[k]=data[k]; }
+    registro.cv=subidos[0]; registro.portafolio=subidos[1];
+    return fetch(CONFIG.api+'/postular',{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(registro)
+    });
+  }).then(function(r){
+    return r.json().catch(function(){ throw new Error('respuesta ilegible'); });
+  }).then(function(res){
+    if(!res.ok) throw new Error(res.error||'el almacén rechazó la postulación');
+    return true;
+  });
+}
+
+/* ── Plan B: Google Apps Script ───────────────────────────────────────
+   Aquí sí en base64, que es lo único que Apps Script entiende. */
+function enviarAAppsScript(data,cv,pf){
+  if(!CONFIG.endpoint) return Promise.reject(new Error('sin plan B configurado'));
+  return Promise.all([cv?toBase64(cv):null,pf?toBase64(pf):null]).then(function(b){
+    var copia={};
+    for(var k in data){ if(Object.prototype.hasOwnProperty.call(data,k)) copia[k]=data[k]; }
+    if(cv){ copia.cv_nombre=cv.name; copia.cv_tipo=cv.type; copia.cv_base64=b[0]; }
+    if(pf){ copia.portafolio_nombre=pf.name; copia.portafolio_tipo=pf.type; copia.portafolio_base64=b[1]; }
+    /* text/plain evita el preflight CORS: necesario para Google Apps Script. */
+    return fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(copia)});
+  }).then(function(r){
+    if(!r.ok) throw new Error('http '+r.status);
+    return r.text();
+  }).then(function(cuerpo){
+    /* Apps Script responde 200 aunque falle por dentro: sin mirar el cuerpo
+       daríamos la postulación por buena y se perdería en silencio. */
+    var res={}; try{ res=JSON.parse(cuerpo); }catch(e){ throw new Error('respuesta no reconocida'); }
+    if(!res.ok) throw new Error(res.error||'el receptor rechazó la postulación');
+    return true;
+  });
+}
+
 /* Copia local en el navegador de quien postula. Es lo único que queda si el
    receptor está caído; se recupera con postular.html?admin=1 en ese equipo. */
 function guardarLocal(data){
@@ -972,29 +1036,21 @@ document.getElementById('applyform').addEventListener('submit',function(ev){
     if(k==='perfil'){ data.perfiles=(data.perfiles||[]).concat([v]); } else { data[k]=v; } });
   data.perfiles=(data.perfiles||[]).join(' | ');
 
-  Promise.all([cv?toBase64(cv):null,pf?toBase64(pf):null]).then(function(b){
-    if(cv){ data.cv_nombre=cv.name; data.cv_tipo=cv.type; data.cv_base64=b[0]; }
-    if(pf){ data.portafolio_nombre=pf.name; data.portafolio_tipo=pf.type; data.portafolio_base64=b[1]; }
-    guardarLocal(data);   /* red de seguridad: si el envío falla, no se pierde */
-    if(CONFIG.endpoint){
-      /* text/plain evita el preflight CORS: necesario para Google Apps Script.
-         n8n, Make, Zapier y cualquier backend propio reciben el mismo JSON igual. */
-      return fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
-        .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.text(); })
-        .then(function(cuerpo){
-          /* Apps Script responde 200 aunque falle por dentro: sin mirar el
-             cuerpo daríamos la postulación por buena y se perdería en silencio. */
-          var res={}; try{ res=JSON.parse(cuerpo); }catch(e){ throw new Error('respuesta no reconocida'); }
-          if(!res.ok) throw new Error(res.error||'el receptor rechazó la postulación');
-        });
-    }
-    return true;
-  }).then(function(){
+  guardarLocal(data);   /* red de seguridad: si todo lo demás falla, no se pierde */
+
+  enviarAlAlmacen(data,cv,pf)
+    .catch(function(err){
+      /* El almacén propio es el que manda; Apps Script queda de plan B. */
+      console.warn('El almacén no aceptó la postulación:',err.message);
+      return enviarAAppsScript(data,cv,pf);
+    })
+    .then(function(){
     document.getElementById('formview').style.display='none';
     document.getElementById('doneview').style.display='block';
     window.scrollTo(0,0);
-  }).catch(function(){
-    btn.disabled=false; show('err',t('fm.errsend'));
+  }).catch(function(err){
+    btn.disabled=false;
+    show('err',t('fm.errsend')+(err && err.message ? ' ('+err.message+')' : ''));
   });
 });
 

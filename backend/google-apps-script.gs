@@ -122,9 +122,12 @@ function doGet(e) {
     estado.carpeta = carpeta().getUrl();
 
     if (e.parameter.datos) {
-      estado.columnas = HEADERS;
+      /* Leemos la cabecera de la hoja, no la constante HEADERS: si una versión
+         anterior escribió otras columnas, el panel debe mostrar las de verdad. */
+      var ancho = Math.max(1, sheet.getLastColumn());
+      estado.columnas = sheet.getRange(1, 1, 1, ancho).getDisplayValues()[0];
       estado.filas = sheet.getLastRow() < 2 ? [] :
-        sheet.getRange(2, 1, sheet.getLastRow() - 1, HEADERS.length).getDisplayValues();
+        sheet.getRange(2, 1, sheet.getLastRow() - 1, ancho).getDisplayValues();
     }
   } catch (err) {
     estado.ok = false;

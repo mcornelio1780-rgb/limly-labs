@@ -221,7 +221,7 @@ function csv(){
   var cuerpo = [estado.columnas].concat(estado.filas)
     .map(function(f){ return f.map(esc).join(','); }).join('\r\n');
   /* El BOM hace que Excel abra bien las tildes y la ñ. */
-  var blob = new Blob(["﻿"+cuerpo], {type:'text/csv;charset=utf-8'});
+  var blob = new Blob(["\ufeff"+cuerpo], {type:'text/csv;charset=utf-8'});
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = 'postulaciones-limly-labs-'+new Date().toISOString().slice(0,10)+'.csv';

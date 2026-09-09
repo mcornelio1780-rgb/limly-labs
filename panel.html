@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Panel de postulaciones — Limly Labs</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1130; --navy2:#161B3D; --cream:#F4F1EA;
+  --coral:#FF6B4A; --peach:#FFB088; --muted:#6B6F8C;
+  --line:rgba(244,241,234,.12);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--navy);color:var(--cream);
+  font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--peach)}
+.wrap{max-width:1180px;margin:0 auto;padding:32px 24px 80px}
+
+header{display:flex;flex-wrap:wrap;gap:16px;align-items:baseline;
+  justify-content:space-between;padding-bottom:20px;border-bottom:1px solid var(--line)}
+h1{font-family:'Space Mono',monospace;font-size:20px;margin:0;letter-spacing:-.02em}
+h1 span{color:var(--coral)}
+.sub{color:var(--muted);font-size:13px;margin:6px 0 0}
+
+/* ── Puerta: sin clave, la página no muestra nada ───────────────────── */
+.gate{max-width:520px;margin:64px auto;text-align:left}
+.gate h2{font-family:'Space Mono',monospace;font-size:17px;margin:0 0 10px}
+.gate p{color:var(--muted);font-size:14px;line-height:1.65;margin:0 0 22px}
+label{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--muted);margin:0 0 7px}
+input[type=text],input[type=password],input[type=search]{
+  width:100%;padding:12px 14px;border-radius:9px;border:1px solid var(--line);
+  background:var(--navy2);color:var(--cream);font:inherit;font-size:14px}
+input:focus{outline:none;border-color:var(--coral)}
+.field{margin-bottom:16px}
+button{font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:9px;
+  padding:12px 22px;background:var(--coral);color:#fff}
+button:hover{background:#ff5733}
+button.ghost{background:transparent;color:var(--cream);border:1px solid var(--line);
+  padding:9px 16px;font-size:13px;font-weight:500}
+button.ghost:hover{border-color:var(--coral);background:transparent}
+
+/* ── Barra de acciones ──────────────────────────────────────────────── */
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:24px 0 18px}
+.bar input[type=search]{flex:1;min-width:220px}
+.count{font-family:'Space Mono',monospace;font-size:13px;color:var(--muted);
+  white-space:nowrap}
+.count b{color:var(--cream)}
+
+/* ── Lista de postulantes ───────────────────────────────────────────── */
+.row{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;
+  background:var(--navy2);overflow:hidden}
+.row > summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;
+  grid-template-columns:1fr auto;gap:6px 18px;align-items:center}
+.row > summary::-webkit-details-marker{display:none}
+.row:hover{border-color:rgba(255,107,74,.4)}
+.who{font-weight:600;font-size:15px}
+.who em{font-style:normal;color:var(--muted);font-weight:400}
+.meta{grid-column:1;color:var(--muted);font-size:13px}
+.when{font-family:'Space Mono',monospace;font-size:12px;color:var(--muted);
+  text-align:right;grid-row:1/3}
+.detail{padding:4px 18px 20px;border-top:1px solid var(--line)}
+dl{display:grid;grid-template-columns:190px 1fr;gap:9px 20px;margin:16px 0 0;font-size:14px}
+dt{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.06em;
+  padding-top:2px}
+dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+
+.msg{padding:14px 16px;border-radius:9px;font-size:14px;margin:18px 0;line-height:1.6}
+.msg.err{background:rgba(255,107,74,.12);border:1px solid rgba(255,107,74,.45)}
+.msg.info{background:var(--navy2);border:1px solid var(--line);color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:70px 20px;font-size:15px}
+.links{font-size:13px;color:var(--muted);margin-top:26px;
+  padding-top:18px;border-top:1px solid var(--line)}
+.links a{margin-right:20px}
+[hidden]{display:none!important}
+@media(max-width:640px){
+  dl{grid-template-columns:1fr;gap:3px 0}
+  dt{margin-top:10px}
+  .when{grid-row:auto;grid-column:1;text-align:left}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div>
+    <h1>Postulaciones <span>·</span> Limly Labs 2026</h1>
+    <p class="sub" id="sub">Panel interno</p>
+  </div>
+  <button class="ghost" id="salir" hidden>Cerrar sesión</button>
+</header>
+
+<!-- Puerta ─────────────────────────────────────────────────────────── -->
+<section class="gate" id="gate">
+  <h2>Clave del panel</h2>
+  <p>Esta página no muestra nada hasta que introduzcas la clave. La imprime la
+     función <code>enlaces</code> del Apps Script, en el panel de ejecución.</p>
+  <form id="gateform">
+    <div class="field">
+      <label for="clave">Clave</label>
+      <input type="password" id="clave" autocomplete="off" spellcheck="false" required>
+    </div>
+    <div class="field">
+      <label for="endpoint">Endpoint (solo si cambiaste la implementación)</label>
+      <input type="text" id="endpoint" spellcheck="false">
+    </div>
+    <button type="submit">Entrar</button>
+  </form>
+  <div id="gatemsg"></div>
+</section>
+
+<!-- Panel ──────────────────────────────────────────────────────────── -->
+<section id="panel" hidden>
+  <div class="bar">
+    <input type="search" id="q" placeholder="Buscar por nombre, correo, universidad, squad…">
+    <span class="count" id="count"></span>
+    <button class="ghost" id="recargar">Recargar</button>
+    <button class="ghost" id="csv">Descargar CSV</button>
+  </div>
+  <div id="lista"></div>
+  <div class="links" id="links"></div>
+</section>
+
+</div>
+<script>
+var ENDPOINT_POR_DEFECTO = "https://script.google.com/macros/s/AKfycbx2NAxteROHoYJ_l9HH_w3QmLiWLflwlX4riidzoyMee-ydf36agk3bIl1sbh5nx2tf4Q/exec";
+
+var $ = function(id){ return document.getElementById(id); };
+var estado = { columnas:[], filas:[], hoja:"", carpeta:"" };
+
+/* La clave vive solo en este navegador. Nunca viaja al sitio de Vercel:
+   el sitio es estático, la petición va directa a Google Apps Script. */
+function guardado(k,d){ try{ return localStorage.getItem(k)||d; }catch(e){ return d; } }
+function guardar(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+
+function endpoint(){ return guardado('ll_endpoint', ENDPOINT_POR_DEFECTO); }
+
+function cargar(clave){
+  var url = endpoint()+'?panel='+encodeURIComponent(clave)+'&datos=1&t='+Date.now();
+  return fetch(url).then(function(r){
+    if(!r.ok) throw new Error('El endpoint respondió '+r.status+'.');
+    return r.json();
+  }).then(function(d){
+    if(!d.ok) throw new Error(d.error||'El Apps Script devolvió un error.');
+    /* Sin "filas" la clave no coincidió: el script devuelve el estado pelado. */
+    if(!d.filas) throw new Error('Clave incorrecta, o el Apps Script todavía no tiene una clave (ejecuta instalar y luego enlaces).');
+    estado = { columnas:d.columnas||[], filas:d.filas, hoja:d.hoja||"", carpeta:d.carpeta||"" };
+    return estado;
+  });
+}
+
+/* ── Render ─────────────────────────────────────────────────────────── */
+
+var C = {};  /* nombre de columna → índice */
+function indexar(cols){ C={}; cols.forEach(function(n,i){ C[n]=i; }); }
+function campo(fila,nombre){ return C[nombre]===undefined ? "" : (fila[C[nombre]]||""); }
+
+function esUrl(v){ return /^https?:\/\//i.test(v); }
+
+function pintar(){
+  indexar(estado.columnas);
+  var q = $('q').value.trim().toLowerCase();
+  var filas = estado.filas.filter(function(f){
+    return !q || f.join(' ').toLowerCase().indexOf(q) > -1;
+  });
+
+  $('count').innerHTML = q
+    ? '<b>'+filas.length+'</b> de '+estado.filas.length
+    : '<b>'+estado.filas.length+'</b> postulación'+(estado.filas.length===1?'':'es');
+
+  if(!filas.length){
+    $('lista').innerHTML = '<p class="empty">'+
+      (estado.filas.length ? 'Ninguna coincide con la búsqueda.'
+                           : 'Todavía no hay postulaciones.')+'</p>';
+    return;
+  }
+
+  $('lista').innerHTML = filas.map(function(f){
+    var nombre = (campo(f,'Nombres')+' '+campo(f,'Apellidos')).trim() || 'Sin nombre';
+    var meta = [campo(f,'Universidad'), campo(f,'Carrera'), campo(f,'Squad')]
+                 .filter(Boolean).join(' · ');
+    var detalle = estado.columnas.map(function(col,i){
+      var v = f[i];
+      if(!v) return '';
+      return '<dt>'+txt(col)+'</dt><dd>'+(esUrl(v)
+        ? '<a href="'+txt(v)+'" target="_blank" rel="noopener">'+txt(v)+'</a>'
+        : txt(v))+'</dd>';
+    }).join('');
+
+    return '<details class="row"><summary>'+
+      '<span class="who">'+txt(nombre)+' <em>'+txt(campo(f,'Correo'))+'</em></span>'+
+      '<span class="when">'+txt(campo(f,'Fecha'))+'</span>'+
+      '<span class="meta">'+txt(meta)+'</span>'+
+      '</summary><div class="detail"><dl>'+detalle+'</dl></div></details>';
+  }).join('');
+}
+
+function txt(s){
+  return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function pintarEnlaces(){
+  var l = [];
+  if(estado.hoja)    l.push('<a href="'+txt(estado.hoja)+'" target="_blank" rel="noopener">Abrir la Google Sheet</a>');
+  if(estado.carpeta) l.push('<a href="'+txt(estado.carpeta)+'" target="_blank" rel="noopener">Abrir la carpeta de CVs</a>');
+  $('links').innerHTML = l.join('');
+}
+
+/* ── CSV ────────────────────────────────────────────────────────────── */
+
+function csv(){
+  var esc = function(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; };
+  var cuerpo = [estado.columnas].concat(estado.filas)
+    .map(function(f){ return f.map(esc).join(','); }).join('\r\n');
+  /* El BOM hace que Excel abra bien las tildes y la ñ. */
+  var blob = new Blob(["﻿"+cuerpo], {type:'text/csv;charset=utf-8'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'postulaciones-limly-labs-'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+/* ── Arranque ───────────────────────────────────────────────────────── */
+
+function abrir(clave){
+  $('gatemsg').innerHTML = '<div class="msg info">Cargando…</div>';
+  return cargar(clave).then(function(){
+    guardar('ll_panel_key', clave);
+    $('gate').hidden = true;
+    $('panel').hidden = false;
+    $('salir').hidden = false;
+    $('gatemsg').innerHTML = '';
+    $('sub').textContent = 'Panel interno · datos en vivo desde tu Google Sheet';
+    pintar(); pintarEnlaces();
+  }).catch(function(err){
+    $('gatemsg').innerHTML = '<div class="msg err">'+txt(err.message)+'</div>';
+    throw err;
+  });
+}
+
+$('endpoint').value = endpoint();
+
+$('gateform').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var ep = $('endpoint').value.trim();
+  if(ep) guardar('ll_endpoint', ep);
+  abrir($('clave').value.trim()).catch(function(){});
+});
+
+$('q').addEventListener('input', pintar);
+$('csv').addEventListener('click', csv);
+$('recargar').addEventListener('click', function(){
+  var b = $('recargar'); b.disabled = true; b.textContent = 'Cargando…';
+  cargar(guardado('ll_panel_key','')).then(pintar).catch(function(err){
+    $('lista').insertAdjacentHTML('beforebegin','<div class="msg err">'+txt(err.message)+'</div>');
+  }).then(function(){ b.disabled = false; b.textContent = 'Recargar'; });
+});
+$('salir').addEventListener('click', function(){
+  guardar('ll_panel_key','');
+  location.reload();
+});
+
+/* Si ya entraste antes en este navegador, no vuelve a pedir la clave. */
+var recordada = guardado('ll_panel_key','');
+if(recordada) abrir(recordada).catch(function(){});
+</script>
+</body>
+</html>

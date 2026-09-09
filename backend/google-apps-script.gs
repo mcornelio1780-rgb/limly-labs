@@ -101,9 +101,13 @@ function doPost(e) {
 /**
  * Abrir la URL /exec en el navegador cae aquí: sirve para comprobar que vive.
  *
- * Añadiéndole ?panel=TU_CLAVE devuelve además los enlaces a la hoja y a la
- * carpeta. La clave la imprime instalar(); sin ella no se revela nada, porque
- * esta URL es pública y ahí dentro hay datos personales de quien postula.
+ * Con ?panel=TU_CLAVE devuelve además los enlaces a la hoja y a la carpeta.
+ * Con ?panel=TU_CLAVE&datos=1 devuelve todas las filas: es lo que lee
+ * /panel del sitio.
+ *
+ * La clave la imprime instalar(). Sin ella no se revela nada, porque esta URL
+ * es pública —va dentro del HTML del formulario— y ahí dentro hay nombres,
+ * correos, teléfonos y CVs de gente real.
  */
 function doGet(e) {
   var estado = { ok: true, servicio: "limly-labs-postulaciones" };
@@ -112,9 +116,15 @@ function doGet(e) {
     estado.postulaciones = Math.max(0, sheet.getLastRow() - 1);
 
     var clave = PropertiesService.getScriptProperties().getProperty("CLAVE_PANEL");
-    if (clave && e && e.parameter && e.parameter.panel === clave) {
-      estado.hoja = sheet.getParent().getUrl();
-      estado.carpeta = carpeta().getUrl();
+    if (!clave || !e || !e.parameter || e.parameter.panel !== clave) return json(estado);
+
+    estado.hoja = sheet.getParent().getUrl();
+    estado.carpeta = carpeta().getUrl();
+
+    if (e.parameter.datos) {
+      estado.columnas = HEADERS;
+      estado.filas = sheet.getLastRow() < 2 ? [] :
+        sheet.getRange(2, 1, sheet.getLastRow() - 1, HEADERS.length).getDisplayValues();
     }
   } catch (err) {
     estado.ok = false;

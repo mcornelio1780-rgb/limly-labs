@@ -5,6 +5,7 @@ Sitio estático, sin dependencias ni build. Trilingüe (ES / EN / PT).
 ```
 index.html      Sitio del holding: nosotros, portafolio, mapa, pasantías, beneficios
 postular.html   Formulario de postulación con subida de CV y portafolio
+panel.html      Panel interno para leer las postulaciones (pide clave)
 favicon.png     Isotipo de la marca
 vercel.json     Configuración de Vercel
 backend/        Código para recibir las postulaciones (Google Apps Script)
@@ -94,18 +95,20 @@ No hay panel propio: **el panel es tu Google Sheet.**
 
 ¿Perdiste las direcciones exactas? En el editor de Apps Script elige la función
 **`enlaces`** y pulsa Ejecutar: las vuelve a imprimir en el panel de ejecución,
-junto con el número de postulaciones recibidas.
+junto con la clave del panel y el número de postulaciones recibidas.
 
-Eso te da también una URL de consulta rápida, con la clave que imprime
-`enlaces`:
+### El panel del sitio
 
-```
-https://script.google.com/macros/s/.../exec?panel=TU_CLAVE
-```
+<https://limly-labs.vercel.app/panel> lee las postulaciones en vivo y las
+muestra en una lista buscable, con descarga a CSV y enlace al CV de cada
+persona. Pide la clave que imprime `enlaces`; la clave queda guardada en tu
+navegador, no en el sitio.
 
-Devuelve el total de postulaciones y los dos enlaces. **Sin la clave no revela
-nada**, y con razón: esa URL es pública y en la hoja hay datos personales de
-quien postula. No la pegues en el sitio ni la compartas fuera del equipo.
+La página es pública pero **sin la clave no muestra nada, y el sitio de Vercel
+nunca llega a ver los datos**: es HTML estático, la petición sale del navegador
+directa a Google Apps Script. Los datos siguen viviendo solo en tu Google Sheet.
+No pongas la clave en el sitio ni la compartas fuera del equipo: detrás hay
+nombres, correos, teléfonos y CVs de gente real.
 
 ### Si algo falla
 

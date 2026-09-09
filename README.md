@@ -60,9 +60,18 @@ recuperable con `postular.html?admin=1` en ese mismo equipo.
 ### 3.1 Crear el almacén (obligatorio, 2 min)
 
 1. Vercel → tu proyecto → pestaña **Storage** → **Create Database** → **Blob**.
-2. Nómbralo `postulaciones` y conéctalo al proyecto.
+2. Nómbralo `postulaciones`.
+3. **Access: Private.** El código guarda con `access: 'private'`; con Public no cuadra.
+4. **Custom Environment Variable Prefix: déjalo vacío.** Con un prefijo, las
+   variables se llaman distinto y el código no las encuentra.
+5. **Marca "Add a read-write token env var to this connection".** Viene
+   desmarcada, y sin ella solo se crean `BLOB_STORE_ID` y
+   `BLOB_WEBHOOK_PUBLIC_KEY`, que no sirven para escribir: cada postulación
+   moriría con *"No blob credentials found"*.
+6. Conéctalo al proyecto.
 
-Vercel inyecta `BLOB_READ_WRITE_TOKEN` solo. No tienes que copiar nada.
+Con la casilla marcada, Vercel inyecta `BLOB_READ_WRITE_TOKEN` solo. No tienes
+que copiar nada.
 
 ### 3.2 Poner la clave del panel (obligatorio)
 

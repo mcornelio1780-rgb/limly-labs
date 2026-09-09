@@ -947,6 +947,15 @@ function toBase64(file){
 }
 function show(kind,text){ var m=document.getElementById('msg'); m.className='msg '+kind; m.textContent=text; }
 
+/* Copia local en el navegador de quien postula. Es lo único que queda si el
+   receptor está caído; se recupera con postular.html?admin=1 en ese equipo. */
+function guardarLocal(data){
+  try{
+    var all=JSON.parse(localStorage.getItem('ll_apps')||'[]');
+    all.push(data); localStorage.setItem('ll_apps',JSON.stringify(all));
+  }catch(e){}
+}
+
 document.getElementById('applyform').addEventListener('submit',function(ev){
   ev.preventDefault();
   var form=ev.target, btn=document.getElementById('submitbtn');
@@ -966,14 +975,19 @@ document.getElementById('applyform').addEventListener('submit',function(ev){
   Promise.all([cv?toBase64(cv):null,pf?toBase64(pf):null]).then(function(b){
     if(cv){ data.cv_nombre=cv.name; data.cv_tipo=cv.type; data.cv_base64=b[0]; }
     if(pf){ data.portafolio_nombre=pf.name; data.portafolio_tipo=pf.type; data.portafolio_base64=b[1]; }
+    guardarLocal(data);   /* red de seguridad: si el envío falla, no se pierde */
     if(CONFIG.endpoint){
       /* text/plain evita el preflight CORS: necesario para Google Apps Script.
          n8n, Make, Zapier y cualquier backend propio reciben el mismo JSON igual. */
       return fetch(CONFIG.endpoint,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(data)})
-        .then(function(r){ if(!r.ok) throw new Error('http'); });
+        .then(function(r){ if(!r.ok) throw new Error('http '+r.status); return r.text(); })
+        .then(function(cuerpo){
+          /* Apps Script responde 200 aunque falle por dentro: sin mirar el
+             cuerpo daríamos la postulación por buena y se perdería en silencio. */
+          var res={}; try{ res=JSON.parse(cuerpo); }catch(e){ throw new Error('respuesta no reconocida'); }
+          if(!res.ok) throw new Error(res.error||'el receptor rechazó la postulación');
+        });
     }
-    var all=JSON.parse(localStorage.getItem('ll_apps')||'[]');
-    all.push(data); localStorage.setItem('ll_apps',JSON.stringify(all));
     return true;
   }).then(function(){
     document.getElementById('formview').style.display='none';

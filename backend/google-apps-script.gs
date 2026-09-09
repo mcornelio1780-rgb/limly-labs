@@ -180,13 +180,18 @@ function enlaces() {
   var url = "";
   try { url = ScriptApp.getService().getUrl() || ""; } catch (err) { url = ""; }
 
+  var clave = props.getProperty("CLAVE_PANEL") || "(ejecuta instalar primero)";
+
   var resumen =
     "\n╭─ Limly Labs · postulaciones ─────────────────────────\n" +
     "│ Hoja:    " + sheet.getParent().getUrl() + "\n" +
     "│ Carpeta: " + carpeta().getUrl() + "\n" +
     "│ Filas:   " + Math.max(0, sheet.getLastRow() - 1) + "\n" +
-    (url ? "│ Panel:   " + url + "?panel=" + props.getProperty("CLAVE_PANEL") + "\n" : "") +
-    "╰─ Guarda la hoja y la carpeta: son tu panel de la convocatoria.\n";
+    "│\n" +
+    "│ CLAVE DEL PANEL:  " + clave + "\n" +
+    "│ Pégala en https://limly-labs.vercel.app/panel\n" +
+    (url ? "│ Atajo:   " + url + "?panel=" + clave + "\n" : "") +
+    "╰──────────────────────────────────────────────────────\n";
   console.log(resumen);
   return resumen;
 }
